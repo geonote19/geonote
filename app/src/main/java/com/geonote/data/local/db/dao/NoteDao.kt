@@ -7,7 +7,7 @@ abstract class NoteDao {
 
     abstract fun insertNote(note: Note)
 
-    abstract fun remoteNote(note: Note)
+    abstract fun removeNote(note: Note)
 
     abstract fun removeNoteById(id: Int)
 
