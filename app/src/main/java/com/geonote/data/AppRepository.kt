@@ -14,7 +14,7 @@ class AppRepository private constructor(
 
     fun addNote(note: Note) {
         mDbDataSource.addOrUpdateNote(note)
-        mGeoManager.addMarker(note.marker)
+        mGeoManager.addMarker(note)
     }
 
     // ...

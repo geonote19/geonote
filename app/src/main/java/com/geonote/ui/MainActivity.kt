@@ -1,13 +1,14 @@
 package com.geonote.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.geonote.BR
 import com.geonote.R
+import com.geonote.databinding.ActivityMainBinding
+import com.geonote.ui.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+    override val mViewModelClass = MainActivityViewModel::class.java
+    override val mLayoutId = R.layout.activity_main
+    override val mBindingVariable = BR.viewmodel
+
 }

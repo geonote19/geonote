@@ -4,15 +4,14 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import com.geonote.data.AppRepository
-import com.geonote.data.model.db.Marker
+import com.geonote.data.model.db.Note
 import com.geonote.helper.K
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 
 class GeoManager private constructor(
-    private val mContext: Context,
-    private val mAppRepository: AppRepository
+    private val mContext: Context
 ) {
 
     val mGeofencingClient = LocationServices.getGeofencingClient(mContext)
@@ -63,7 +62,7 @@ class GeoManager private constructor(
     }
 
 
-    fun addMarker(marker: Marker) {
+    fun addMarker(note: Note) {
     }
 
     fun removeMarker(id: Int) {
@@ -84,10 +83,7 @@ class GeoManager private constructor(
             if (INSTANCE == null) {
                 synchronized(this) {
                     if (INSTANCE == null) {
-                        INSTANCE = GeoManager(
-                            context,
-                            AppRepository.getInstance(context)
-                        )
+                        INSTANCE = GeoManager(context)
                     }
                 }
             }

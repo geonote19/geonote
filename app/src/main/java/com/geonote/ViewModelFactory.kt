@@ -4,6 +4,9 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.geonote.data.AppRepository
+import com.geonote.ui.MainActivityViewModel
+import com.geonote.ui.detail.DetailFragmentViewModel
+import com.geonote.ui.list.ListFragmentViewModel
 
 class ViewModelFactory(
         private val mApplication: Application,
@@ -12,9 +15,15 @@ class ViewModelFactory(
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         when {
-//            modelClass.isAssignableFrom(FragmentViewModel::class.java) -> {
-//                return FragmentViewModel(mApplication, mAppRepository) as T
-//            }
+            modelClass.isAssignableFrom(ListFragmentViewModel::class.java) -> {
+                return ListFragmentViewModel(mApplication, mAppRepository) as T
+            }
+            modelClass.isAssignableFrom(DetailFragmentViewModel::class.java) -> {
+                return DetailFragmentViewModel(mApplication, mAppRepository) as T
+            }
+            modelClass.isAssignableFrom(MainActivityViewModel::class.java) -> {
+                return MainActivityViewModel(mApplication, mAppRepository) as T
+            }
         }
         throw IllegalArgumentException("Unknown view model class: " + modelClass.name)
     }

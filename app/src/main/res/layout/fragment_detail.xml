@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewmodel"
-            type="com.geonote.ui.MainActivityViewModel" />
+            type="com.geonote.ui.detail.DetailFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,9 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Geonote" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>
