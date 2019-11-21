@@ -46,8 +46,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-rc02"
 
-    implementation 'androidx.room:room-runtime:2.2.1'
-    kapt 'androidx.room:room-compiler:2.2.1'
+    implementation 'androidx.room:room-runtime:2.2.2'
+    kapt 'androidx.room:room-compiler:2.2.2'
     implementation "androidx.room:room-coroutines:2.1.0-alpha04"
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2'
@@ -58,12 +58,11 @@ dependencies {
     implementation "com.google.android.gms:play-services-location:17.0.0"
     implementation "com.google.android.gms:play-services-maps:17.0.0"
 
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta3'
 
     implementation 'io.coil-kt:coil:0.8.0'
     implementation 'pub.devrel:easypermissions:3.0.0'
 
-
-
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

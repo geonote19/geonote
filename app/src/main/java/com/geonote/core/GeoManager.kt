@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import com.geonote.data.AppRepository
 import com.geonote.data.model.db.Note
-import com.geonote.helper.K
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
+import timber.log.Timber
 
 class GeoManager private constructor(
     private val mContext: Context,
@@ -39,14 +39,15 @@ class GeoManager private constructor(
             .build()
 
         val intent = Intent(mContext, GeofenceBroadcastReceiver::class.java)
-        val geofencePendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val geofencePendingIntent =
+            PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         mGeofencingClient.addGeofences(geofencingRequest, geofencePendingIntent).run {
             addOnSuccessListener {
-                K.d("addGeofences success")
+                Timber.d("addGeofences success")
             }
             addOnFailureListener {
-                K.e("addGeofences failure", it)
+                Timber.e(it, "addGeofences failure")
             }
         }
     }
@@ -54,10 +55,10 @@ class GeoManager private constructor(
     fun removeGeofence() {
         mGeofencingClient.removeGeofences(geofencePendingIntent).run {
             addOnSuccessListener {
-                K.d("removeGeofences success")
+                Timber.d("removeGeofences success")
             }
             addOnFailureListener {
-                K.e("removeGeofences failure", it)
+                Timber.e(it, "removeGeofences failure")
             }
         }
     }

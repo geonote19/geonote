@@ -3,17 +3,17 @@ package com.geonote.core
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.geonote.helper.K
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingEvent
+import timber.log.Timber
 
 class GeofenceBroadcastReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        K.d("onReceive")
+        Timber.d("onReceive")
         val geofencingEvent = GeofencingEvent.fromIntent(intent)
         if (geofencingEvent.hasError()) {
-            K.d("hasError: error=${geofencingEvent.errorCode}")
+            Timber.d("hasError: error=${geofencingEvent.errorCode}")
         }
 
         val geofenceTransitionType: Int = geofencingEvent.geofenceTransition
@@ -23,10 +23,10 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         ) {
             val geofenceList = geofencingEvent.triggeringGeofences
             for (geofence in geofenceList) {
-                K.d("geofence name=${geofence.requestId}, geofenceTransitionType=${geofenceTransitionType}")
+                Timber.d("geofence name=${geofence.requestId}, geofenceTransitionType=${geofenceTransitionType}")
             }
         } else {
-            K.d("error geofence type")
+            Timber.d("error geofence type")
         }
     }
 }
