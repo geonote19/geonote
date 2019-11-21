@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.geonote.ViewModelFactory
 
-abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel, A : BaseActivity<*, *>> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel, A : BaseActivity<*, *>> :
+    Fragment() {
 
     abstract val mViewModelClass: Class<V>
     abstract val mLayoutId: Int
@@ -33,12 +34,17 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel, A : BaseActi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this, ViewModelFactory.getInstance()).get(mViewModelClass)
+        mViewModel =
+            ViewModelProviders.of(this, ViewModelFactory.getInstance()).get(mViewModelClass)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         mViewDataBinding = DataBindingUtil.inflate(inflater, mLayoutId, container, false)
-        return  mViewDataBinding.root
+        return mViewDataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -3,21 +3,27 @@ package com.geonote.data
 import android.content.Context
 import com.geonote.core.GeoManager
 import com.geonote.data.local.AppPrefDataSource
-import com.geonote.data.local.db.AppDbDataSource
+import com.geonote.data.local.db.AppDataBase
 import com.geonote.data.model.db.Note
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class AppRepository private constructor(
     private val mPrefDataSource: AppPrefDataSource,
-    private val mDbDataSource: AppDbDataSource,
-    private val mGeoManager: GeoManager
+    private val mDataBase: AppDataBase
 ) {
 
-    fun addNote(note: Note) {
-        mDbDataSource.addOrUpdateNote(note)
-        mGeoManager.addMarker(note)
-    }
+    suspend fun getNoteList(): List<Note> =
+        suspendCoroutine {
+            val noteList = mDataBase.noteDao().getAllNotes()
+            it.resume(noteList)
+        }
 
-    // ...
+    suspend fun getNoteById(id: Long): Note =
+        suspendCoroutine {
+            val note = mDataBase.noteDao().getNoteById(id)
+            it.resume(note)
+        }
 
     companion object {
         private var INSTANCE: AppRepository? = null
@@ -28,8 +34,7 @@ class AppRepository private constructor(
                     if (INSTANCE == null) {
                         INSTANCE = AppRepository(
                             AppPrefDataSource.getInstance(context),
-                            AppDbDataSource.getInstance(context),
-                            GeoManager.getInstance(context)
+                            AppDataBase.getInstance(context)
                         )
                     }
                 }

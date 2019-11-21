@@ -58,10 +58,4 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel>: AppCompatAc
         super.onActivityResult(requestCode, resultCode, data)
         currentFragment?.onActivityResult(requestCode, resultCode, data)
     }
-
-    fun addFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .add(android.R.id.content, fragment)
-            .commit()
-    }
 }

@@ -1,6 +1,7 @@
 package com.geonote.ui.base
 
 import android.app.Application
+import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -18,6 +19,7 @@ abstract class BaseViewModel(
 
     fun <T> requestWithLiveData(
         liveData: MutableLiveData<Event<T>>,
+        observableField: ObservableField<T>? = null,
         request: suspend () -> T?
     ) {
         liveData.postValue(Event.loading())
@@ -26,6 +28,7 @@ abstract class BaseViewModel(
                 val data = request()
                 if (data != null) {
                     liveData.postValue(Event.success(data))
+                    observableField?.set(data)
                 } else {
                     liveData.postValue(Event.error(EmptyValueException()))
                 }

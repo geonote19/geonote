@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_main"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.geonote.ui.list.ListFragment"
+        android:label="listFragment"
+        tools:layout="@layout/fragment_list">
+
+        <action
+            android:id="@+id/action_to_detailfragment"
+            app:destination="@id/detailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.geonote.ui.detail.DetailFragment"
+        android:label="detailFragment"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="noteId"
+            app:argType="long" />
+    </fragment>
+
+</navigation>

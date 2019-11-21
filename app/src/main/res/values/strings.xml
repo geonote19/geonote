@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Geonote</string>
+    <string name="empty_data">Empty data</string>
 </resources>

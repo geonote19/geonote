@@ -11,7 +11,8 @@ import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 
 class GeoManager private constructor(
-    private val mContext: Context
+    private val mContext: Context,
+    private val mAppRepository: AppRepository
 ) {
 
     val mGeofencingClient = LocationServices.getGeofencingClient(mContext)
@@ -83,7 +84,10 @@ class GeoManager private constructor(
             if (INSTANCE == null) {
                 synchronized(this) {
                     if (INSTANCE == null) {
-                        INSTANCE = GeoManager(context)
+                        INSTANCE = GeoManager(
+                            context,
+                            AppRepository.getInstance(context)
+                        )
                     }
                 }
             }
