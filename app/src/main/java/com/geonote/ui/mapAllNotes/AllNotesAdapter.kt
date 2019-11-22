@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geonote.R
 import com.geonote.data.model.db.Note
 
-class AllNotesAdapter(private var notes: List<Note>, private val listener: ClickListener) :
+class AllNotesAdapter(private var notes: MutableList<Note>, private val listener: ClickListener) :
     RecyclerView.Adapter<AllNotesHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllNotesHolder {
@@ -18,6 +18,12 @@ class AllNotesAdapter(private var notes: List<Note>, private val listener: Click
             listener.onClickNote(notes[holder.adapterPosition])
         }
         return holder
+    }
+
+    fun setData(notes: List<Note>) {
+        this.notes.clear()
+        this.notes.addAll(notes)
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: AllNotesHolder, position: Int) {
