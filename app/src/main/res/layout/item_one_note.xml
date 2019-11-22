@@ -13,6 +13,6 @@
         android:text="Название"
         android:textColor="@android:color/black"
         android:textSize="17sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
 </LinearLayout>

@@ -38,15 +38,30 @@
         <argument
             android:name="noteId"
             app:argType="long" />
+        <action
+            android:id="@+id/mapPreview"
+            app:destination="@+id/mapDetailsPin"
+            />
     </fragment>
 
-    <activity
-        android:id="@+id/mapActivity"
-        android:name="com.geonote.ui.mapAllNotes.MapActivity"
-        android:label="mapActivity"
-        tools:layout="@layout/activity_all_notes">
+    <fragment
+        android:id="@+id/mapDetailsPin"
+        android:name="com.geonote.ui.detail.mapDetails.DetailsFragmentMap"
+        android:label="mapDetailsPin"
+        tools:layout="@layout/fragment_details_map">
+        <argument
+            android:name="noteMap"
+            app:argType="long" />
 
-    </activity>
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.geonote.ui.mapAllNotes.AllNotesFragmentBehavior"
+        android:label="mapFragment"
+        tools:layout="@layout/fragment_all_notes">
+
+    </fragment>
 
 
 </navigation>

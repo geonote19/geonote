@@ -10,6 +10,7 @@ import com.geonote.databinding.ActivityMainBinding
 import com.geonote.ui.base.BaseActivity
 import com.geonote.ui.detail.DetailFragmentArgs
 import com.geonote.ui.detail.DetailFragmentDirections
+import com.geonote.ui.detail.EditDetailFragmentDirections
 import com.geonote.ui.list.ListFragmentDirections
 import com.geonote.utils.RequestPermissions
 import timber.log.Timber
@@ -49,7 +50,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     }
 
 
-
+    fun toMapDetailFragment(noteId: Long) {
+        val action = EditDetailFragmentDirections.mapPreview(noteId)
+        mNavController?.navigate(action)
+    }
 
     fun toEditDetailFragment(noteId: Long) {
         val action = DetailFragmentDirections.actionToEditDetailfragment(noteId)
@@ -63,6 +67,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     }
 
     fun toMapActivity() {
-        mNavController!!.navigate(R.id.mapActivity)
+        mNavController!!.navigate(R.id.mapFragment)
     }
 }
