@@ -24,7 +24,7 @@
 
         <service android:name=".core.GeoService" />
 
-        <receiver android:name="com.scooter.geofence.GeofenceBroadcastReceiver" />
+        <receiver android:name="com.geofence.core.GeofenceBroadcastReceiver" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key"/>
