@@ -39,6 +39,6 @@ class AllNotesAdapter(private var notes: MutableList<Note>, private val listener
     }
 
     interface ClickListener {
-        fun onClickNote(item: Note)
+        fun onClickNote(note: Note)
     }
 }

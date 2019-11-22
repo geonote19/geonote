@@ -34,8 +34,6 @@ class AllNotesFragmentBehavior :
     private lateinit var mAdapter: AllNotesAdapter
     private var mMapHelper: MapHelper? = null
 
-    private var clickListener: Listener? = null
-
     private val mCallback = object : MapHelper.Companion.Callback {
         override fun onMarkerPositionChanged(markerData: com.geonote.data.model.Marker) {
             mViewModel.updateMarkerLocation(markerData)
@@ -83,23 +81,8 @@ class AllNotesFragmentBehavior :
         mViewDataBinding.mapView.onLowMemory()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is Listener) {
-            clickListener = context
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        clickListener = null
-    }
-
-    override fun onClickNote(item: Note) {
-        clickListener?.onCarNote(item)
-    }
-
-    interface Listener {
-        fun onCarNote(item: Note)
+    override fun onClickNote(note: Note) {
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        mMapHelper?.setCameraPosition(note.latitude, note.longitude)
     }
 }

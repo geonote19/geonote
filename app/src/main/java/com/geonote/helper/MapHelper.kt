@@ -61,10 +61,18 @@ class MapHelper(
         }
     }
 
-    private fun addMarker(marker: com.geonote.data.model.Marker) =
-        addMarker(marker.id.toString(), marker.latitude, marker.longitude)
+    fun setCameraPosition(latitude: Double, longitude: Double) {
+        val position = LatLng(latitude, longitude)
+        val cameraUpdate = if (mMap.cameraPosition.zoom < MAP_MIN_ZOOM) {
+            CameraUpdateFactory.newLatLngZoom(position, MAP_MIN_ZOOM)
+        } else CameraUpdateFactory.newLatLng(position)
+        mMap.animateCamera(cameraUpdate)
+    }
 
-    private fun addMarker(sid: String, latitude: Double, longitude: Double) =
+    private fun addMarker(markerData: com.geonote.data.model.Marker) =
+        addMarker(markerData.latitude, markerData.longitude)
+
+    private fun addMarker(latitude: Double, longitude: Double) =
         mMap.addMarker(
             MarkerOptions()
                 .position(LatLng(latitude, longitude))
@@ -73,6 +81,7 @@ class MapHelper(
 
     companion object {
         private val MAP_PADDING_TOP = 40.toPixels()
+        private const val MAP_MIN_ZOOM = 10F
 
         private const val DEFAULT_LONGITUDE = 53.904183
         private const val DEFAULT_LATITUDE = 27.560866
