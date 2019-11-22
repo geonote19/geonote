@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.geonote.ui.mapAllNotes.MapActivityViewModel" />
@@ -16,17 +15,11 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <com.google.android.gms.maps.MapView
+        <com.geonote.map.CustomMapView
             android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="400dp"/>
 
-        <FrameLayout
-            android:id="@+id/containerForList"
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
-            app:behavior_peekHeight="96dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior" />
+       <include layout="@layout/bottomsheet"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 </layout>
