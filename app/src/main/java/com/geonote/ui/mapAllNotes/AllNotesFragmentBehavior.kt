@@ -56,7 +56,7 @@ class AllNotesFragmentBehavior :
         allNotesMapRecycler.setHasFixedSize(true)
         mAdapter = AllNotesAdapter(mutableListOf(), this)
         allNotesMapRecycler.adapter = mAdapter
-        
+
         allNotesMapRecycler.addItemDecoration(
             VerticalSpaceItemDecoration(2.toPixels())
         )
