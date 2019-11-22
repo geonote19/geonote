@@ -36,8 +36,8 @@ class Notification(val note: Note, val context: Context) {
     fun setNotificationStyle(note: Note): NotificationCompat.BigTextStyle {
         val bigText: NotificationCompat.BigTextStyle = NotificationCompat.BigTextStyle()
         bigText.setBigContentTitle(note.title)
-        bigText.bigText(note.description)
-        bigText.setSummaryText("Какой-то текст")
+        bigText.bigText("Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием")
+        bigText.setSummaryText("Вы рядом!")
         return bigText
     }
 
