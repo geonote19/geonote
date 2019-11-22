@@ -13,21 +13,32 @@ const val CHANNEL_ID = "1"
 
 class Notification(val note: Note, val context: Context) {
 
-    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    val notificationManager =
+        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     val intent = Intent(context, MainActivity::class.java).putExtra("ID", note.id)
     val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
     val title = note.title
     val text = note.description
+
     val builder = NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_adb_black_24dp)
         .setContentTitle(title)
         .setContentText(text)
+        .setWhen(System.currentTimeMillis()).setShowWhen(true).setStyle(setNotificationStyle(note))
         .setContentIntent(pendingIntent)
         .setAutoCancel(true)
     val notification = builder.build()
 
-    fun showNotification(){
+    fun showNotification() {
         notificationManager.notify(1, notification)
+    }
+
+    fun setNotificationStyle(note: Note): NotificationCompat.BigTextStyle {
+        val bigText: NotificationCompat.BigTextStyle = NotificationCompat.BigTextStyle()
+        bigText.setBigContentTitle(note.title)
+        bigText.bigText(note.description)
+        bigText.setSummaryText("Какой-то текст")
+        return bigText
     }
 
     fun createNotificationChannel() {
