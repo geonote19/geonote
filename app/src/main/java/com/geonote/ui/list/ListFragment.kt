@@ -30,10 +30,17 @@ class ListFragment : BaseFragment<FragmentListBinding, ListFragmentViewModel, Ma
         super.onViewCreated(view, savedInstanceState)
         mAdapter = ListFragmentAdapter(context!!, mOnNoteClickListener)
         recyclerView.adapter = mAdapter
+        buttonSeeOnMap.setOnClickListener {
+            toMapActivity()
+        }
     }
 
     private fun toDetailFragment(noteId: Long) {
         mActivity.toDetailFragment(noteId)
+    }
+
+    private fun toMapActivity(){
+        mActivity.toMapActivity()
     }
 
     override fun setupViewModel(viewModel: ListFragmentViewModel) {
