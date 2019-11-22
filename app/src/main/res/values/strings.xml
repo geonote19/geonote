@@ -7,4 +7,5 @@
     <string name="positive_button_permissions">Дать разрешение</string>
     <string name="add_note">Добавить новую</string>
     <string name="see_on_map">Показать на карте</string>
+    <string name="settings_title">Настройки</string>
 </resources>
