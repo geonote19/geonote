@@ -2,6 +2,7 @@ package com.geonote.ui
 
 import android.Manifest
 import android.os.Build
+import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.geonote.BR
 import com.geonote.R
@@ -40,21 +41,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestPermission.onRequestPermissionsResult(
-                grantResults,
-                R.string.text_request_permissions
-            )
-        ) Timber.e("Fvnjvf")
+        requestPermission.onRequestPermissionsResult(
+            grantResults,
+            R.string.text_request_permissions
+        )
     }
-
-
-
-
-
 
 
     fun toDetailFragment(noteId: Long) {
         val action = ListFragmentDirections.actionToDetailfragment(noteId)
         mNavController!!.navigate(action)
+    }
+
+    fun toMapActivity() {
+        mNavController!!.navigate(R.id.mapActivity)
     }
 }
