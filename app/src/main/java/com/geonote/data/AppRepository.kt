@@ -5,6 +5,7 @@ import com.geonote.core.geofence.GeofenceManager
 import com.geonote.data.local.AppPrefDataSource
 import com.geonote.data.local.db.AppDataBase
 import com.geonote.data.model.db.Note
+import com.geonote.data.model.toMarker
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -13,6 +14,21 @@ class AppRepository private constructor(
     private val mDataBase: AppDataBase,
     private val mGeoManager: GeofenceManager
 ) {
+
+    suspend fun restoreMarkers(): Boolean =
+        suspendCoroutine {
+            try {
+                val markerList = mDataBase.noteDao().getAllNotes()
+                    .map { it.toMarker() }
+                for (marker in markerList) {
+                    mGeoManager.addOrUpdateMarker(marker)
+                }
+                it.resume(true)
+            } catch (ex: Exception) {
+                it.resume(false)
+            }
+        }
+
 
     suspend fun getNoteList(): List<Note> =
         suspendCoroutine {
