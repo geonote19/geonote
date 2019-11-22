@@ -7,6 +7,7 @@ import com.geonote.R
 import com.geonote.databinding.ActivityAllNotesBinding
 import com.geonote.ui.base.BaseActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import timber.log.Timber
 
 class MapActivity : BaseActivity<ActivityAllNotesBinding, MapActivityViewModel>() {
     override val mViewModelClass = MapActivityViewModel::class.java
@@ -20,5 +21,6 @@ class MapActivity : BaseActivity<ActivityAllNotesBinding, MapActivityViewModel>(
 
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.containerForList))
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        Timber.e("FJVKSJFKVJFSKVMKSF")
     }
 }
