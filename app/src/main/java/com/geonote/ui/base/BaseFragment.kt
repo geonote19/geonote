@@ -11,9 +11,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.geonote.ViewModelFactory
-import com.geonote.ui.mapAllNotes.MapActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_list.*
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel, A : BaseActivity<*, *>> :
     Fragment() {

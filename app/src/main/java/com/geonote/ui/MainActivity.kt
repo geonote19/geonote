@@ -67,6 +67,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     }
 
     fun toMapActivity() {
-        mNavController!!.navigate(R.id.mapActivity)
+        mNavController!!.navigate(R.id.mapFragment)
     }
 }

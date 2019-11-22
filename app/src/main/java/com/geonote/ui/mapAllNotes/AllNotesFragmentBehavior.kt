@@ -2,29 +2,38 @@ package com.geonote.ui.mapAllNotes
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.LinearLayout
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.geonote.BR
 import com.geonote.R
 import com.geonote.data.model.Status
 import com.geonote.data.model.db.Note
-import com.geonote.databinding.FragmentRecyclerBinding
+import com.geonote.databinding.FragmentAllNotesBinding
+import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_recycler.*
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.fragment_all_notes.*
+import kotlinx.android.synthetic.main.bottomsheet.*
+import kotlinx.android.synthetic.main.bottomsheet.allNotesMapRecycler
+import timber.log.Timber
 
 class AllNotesFragmentBehavior :
-    BaseFragment<FragmentRecyclerBinding, MapFragmentViewModel, MapActivity>(),
-    AllNotesAdapter.ClickListener {
+    BaseFragment<FragmentAllNotesBinding, MapFragmentViewModel, MainActivity>(),
+    AllNotesAdapter.ClickListener, OnMapReadyCallback {
+
+
+    override fun onMapReady(p0: GoogleMap?) {
+
+    }
 
     override val mViewModelClass = MapFragmentViewModel::class.java
-    override val mLayoutId: Int = R.layout.fragment_recycler
+    override val mLayoutId: Int = R.layout.fragment_all_notes
     override val mBindingVariable: Int = BR.viewmodel
 
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private lateinit var mAdapter: AllNotesAdapter
 
     private var clickListener: Listener? = null
@@ -34,6 +43,17 @@ class AllNotesFragmentBehavior :
         allNotesMapRecycler.setHasFixedSize(true)
         mAdapter = AllNotesAdapter(mutableListOf(), this)
         allNotesMapRecycler.adapter = mAdapter
+
+        mapView.let {
+            lifecycle.addObserver(it)
+            it.onCreate(savedInstanceState)
+            it.getMapAsync(this)
+        }
+
+
+        bottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.bottomSheet))
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        Timber.e("FJVKSJFKVJFSKVMKSF")
     }
 
     override fun setupViewModel(viewModel: MapFragmentViewModel) {
@@ -49,6 +69,17 @@ class AllNotesFragmentBehavior :
                 }
             }
         })
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mViewDataBinding.mapView.onSaveInstanceState(outState)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mViewDataBinding.mapView.onLowMemory()
     }
 
     override fun onAttach(context: Context) {
