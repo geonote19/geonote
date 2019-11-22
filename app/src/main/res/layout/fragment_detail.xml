@@ -12,6 +12,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingBottom="10dp"
         android:orientation="vertical">
 
         <ImageView
@@ -27,9 +30,7 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="5dp"
             android:gravity="left|center_vertical"
             android:background="@drawable/note_item_bg"
             android:text="@{viewmodel.note.title}"
@@ -43,9 +44,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="5dp"
             android:background="@drawable/note_item_bg"
             android:padding="10dp"
             android:text="@{viewmodel.note.description}"
@@ -59,12 +58,9 @@
 
         <Button
             android:id="@+id/editNoteButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:text="Редактировать"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
             android:textColor="@android:color/black"
             android:background="@drawable/note_action_bg"
             android:foreground="@drawable/ripple"
