@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.geonote.BR
+import com.geonote.GraphMainDirections
 import com.geonote.R
 import com.geonote.databinding.ActivityMainBinding
 import com.geonote.ui.base.BaseActivity
@@ -56,13 +57,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     }
 
     fun toEditDetailFragment(noteId: Long) {
-        val action = DetailFragmentDirections.actionToEditDetailfragment(noteId)
+        val action = GraphMainDirections.actionToEditDetailfragment(noteId)
         mNavController!!.navigate(action)
     }
 
 
     fun toDetailFragment(noteId: Long) {
-        val action = ListFragmentDirections.actionToDetailfragment(noteId)
+        val action =  GraphMainDirections.actionToDetailfragment(noteId)
         mNavController!!.navigate(action)
     }
 

@@ -1,12 +1,12 @@
 package com.geonote.ui.mapAllNotes
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import com.geonote.BR
 import com.geonote.R
+import com.geonote.data.model.Marker
 import com.geonote.data.model.Status
 import com.geonote.data.model.db.Note
 import com.geonote.data.model.toMarker
@@ -37,9 +37,15 @@ class AllNotesFragmentBehavior :
     private var mMapHelper: MapHelper? = null
 
     private val mCallback = object : MapHelper.Companion.Callback {
+
+        override fun onMarkerClicked(markerData: Marker) {
+            mActivity.toDetailFragment(markerData.id)
+        }
+
         override fun onMarkerPositionChanged(markerData: com.geonote.data.model.Marker) {
             mViewModel.updateMarkerLocation(markerData)
         }
+
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -69,6 +75,11 @@ class AllNotesFragmentBehavior :
         bottomSheet.applyDefaultOutlineProvider(CustomViewOutlineProvider.RoundedArea.TOP)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        textForBehavior.setOnClickListener {
+            bottomSheetBehavior.state =
+                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) BottomSheetBehavior.STATE_EXPANDED
+                else BottomSheetBehavior.STATE_COLLAPSED
+        }
         allNotesMapRecycler.addItemDecoration(
             VerticalSpaceItemDecoration(2.toPixels())
         )

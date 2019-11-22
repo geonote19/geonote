@@ -5,5 +5,6 @@ data class Marker(
     var longitude: Double,
     var latitude: Double,
     val radiusM: Int,
-    val lifetimeMs: Long
+    val lifetimeMs: Long,
+    val title: String
 )

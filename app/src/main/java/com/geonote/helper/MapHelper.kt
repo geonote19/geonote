@@ -4,14 +4,12 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import com.geonote.R
+import com.geonote.map.CustomMarkerInfoWindowView
 import com.geonote.utils.SystemUtils
 import com.geonote.utils.toPixels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 
 @SuppressLint("MissingPermission")
 class MapHelper(
@@ -20,10 +18,9 @@ class MapHelper(
     private var mCallback: Callback? = null
 ) {
 
-    private var mMarkerDataList = mutableMapOf<Marker, com.geonote.data.model.Marker>()
-
     init {
         with(mMap) {
+            setInfoWindowAdapter(CustomMarkerInfoWindowView(context))
             setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style))
             moveCamera(
                 CameraUpdateFactory.newLatLngZoom(
@@ -35,6 +32,11 @@ class MapHelper(
                 isMyLocationEnabled = true
             }
             setPadding(0, MAP_PADDING_TOP, 0, 0)
+            setOnInfoWindowClickListener {
+                (it.tag as? com.geonote.data.model.Marker)?.let {
+                    mCallback?.onMarkerClicked(it)
+                }
+            }
         }
         addOnMarkerDragListener()
     }
@@ -45,7 +47,7 @@ class MapHelper(
             override fun onMarkerDrag(marker: Marker?) {}
 
             override fun onMarkerDragEnd(marker: Marker) {
-                val markerData = mMarkerDataList[marker] ?: return
+                val markerData = marker.tag as? com.geonote.data.model.Marker ?: return
                 markerData.run {
                     longitude = marker.position.longitude
                     latitude = marker.position.latitude
@@ -57,7 +59,7 @@ class MapHelper(
 
     fun placeMarkers(markerDataList: List<com.geonote.data.model.Marker>) {
         for (markerData in markerDataList) {
-            mMarkerDataList[addMarker(markerData)] = markerData
+            addMarker(markerData).tag = markerData
         }
     }
 
@@ -70,12 +72,11 @@ class MapHelper(
     }
 
     private fun addMarker(markerData: com.geonote.data.model.Marker) =
-        addMarker(markerData.latitude, markerData.longitude)
-
-    private fun addMarker(latitude: Double, longitude: Double) =
         mMap.addMarker(
             MarkerOptions()
-                .position(LatLng(latitude, longitude))
+                .position(LatLng(markerData.latitude, markerData.longitude))
+                .title(markerData.title)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker))
                 .draggable(true)
         )
 
@@ -89,6 +90,7 @@ class MapHelper(
 
         interface Callback {
             fun onMarkerPositionChanged(markerData: com.geonote.data.model.Marker)
+            fun onMarkerClicked(markerData: com.geonote.data.model.Marker)
         }
     }
 }
