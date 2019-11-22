@@ -10,7 +10,7 @@ import com.geonote.data.model.Event
 import com.geonote.data.model.db.Note
 import com.geonote.ui.base.BaseViewModel
 
-class DetailFragmentViewModel(
+class EditDetailFragmentViewModel(
     application: Application,
     appRepository: AppRepository
 ) : BaseViewModel(application, appRepository) {

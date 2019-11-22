@@ -17,34 +17,31 @@
 
     <Button
         android:id="@+id/btnCancel"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Отменить"
-        android:textColor="@android:color/black"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/note_action_bg"
         android:foreground="@drawable/ripple"
-        android:paddingEnd="10dp"
-        android:paddingStart="10dp"
+        android:text="Отменить"
+        android:textColor="@android:color/black"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintHeight_percent="0.5"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Сохранить"
-        android:textColor="@android:color/black"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/note_action_bg"
         android:foreground="@drawable/ripple"
-        android:paddingEnd="10dp"
-        android:paddingStart="10dp"
-        android:layout_marginBottom="30dp"
+        android:text="Сохранить"
+        android:textColor="@android:color/black"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintHeight_percent="0.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp" />
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
