@@ -10,15 +10,14 @@ import com.geonote.R
 import com.geonote.data.model.Status
 import com.geonote.data.model.db.Note
 import com.geonote.databinding.FragmentAllNotesBinding
+import com.geonote.helper.VerticalSpaceItemDecoration
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_all_notes.*
-import kotlinx.android.synthetic.main.bottomsheet.*
 import kotlinx.android.synthetic.main.bottomsheet.allNotesMapRecycler
-import timber.log.Timber
 
 class AllNotesFragmentBehavior :
     BaseFragment<FragmentAllNotesBinding, MapFragmentViewModel, MainActivity>(),
@@ -44,16 +43,18 @@ class AllNotesFragmentBehavior :
         mAdapter = AllNotesAdapter(mutableListOf(), this)
         allNotesMapRecycler.adapter = mAdapter
 
+        allNotesMapRecycler.addItemDecoration(
+            VerticalSpaceItemDecoration(5)
+        )
+
         mapView.let {
             lifecycle.addObserver(it)
             it.onCreate(savedInstanceState)
             it.getMapAsync(this)
         }
 
-
         bottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.bottomSheet))
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        Timber.e("FJVKSJFKVJFSKVMKSF")
     }
 
     override fun setupViewModel(viewModel: MapFragmentViewModel) {
