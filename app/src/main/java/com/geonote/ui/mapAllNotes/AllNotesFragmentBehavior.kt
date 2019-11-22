@@ -15,6 +15,8 @@ import com.geonote.helper.MapHelper
 import com.geonote.helper.VerticalSpaceItemDecoration
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
+import com.geonote.utils.CustomViewOutlineProvider
+import com.geonote.utils.applyDefaultOutlineProvider
 import com.geonote.utils.toPixels
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -60,7 +62,8 @@ class AllNotesFragmentBehavior :
             it.getMapAsync(this)
         }
 
-        bottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.bottomSheet))
+        bottomSheet.applyDefaultOutlineProvider(CustomViewOutlineProvider.RoundedArea.TOP)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         allNotesMapRecycler.addItemDecoration(
             VerticalSpaceItemDecoration(2.toPixels())
