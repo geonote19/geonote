@@ -38,6 +38,21 @@
         <argument
             android:name="noteId"
             app:argType="long" />
+        <action
+            android:id="@+id/mapPreview"
+            app:destination="@+id/mapDetailsPin"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapDetailsPin"
+        android:name="com.geonote.ui.detail.DetailsFragmentMap"
+        android:label="mapDetailsPin"
+        tools:layout="@layout/fragment_details_map">
+        <argument
+            android:name="noteMap"
+            app:argType="long" />
+
     </fragment>
 
     <activity

@@ -10,6 +10,8 @@ import com.geonote.databinding.FragmentDetailBinding
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_detail.*
+import kotlinx.android.synthetic.main.fragment_detail.mapPreview
+import kotlinx.android.synthetic.main.fragment_details_edit.*
 
 class DetailFragment :
     BaseFragment<FragmentDetailBinding, DetailFragmentViewModel, MainActivity>() {
@@ -23,8 +25,6 @@ class DetailFragment :
         super.onCreate(savedInstanceState)
         val args = DetailFragmentArgs.fromBundle(arguments!!)
         mNoteId = args.noteId
-
-       // mapPreview.setOnClickListener(DetailsFragmen)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
