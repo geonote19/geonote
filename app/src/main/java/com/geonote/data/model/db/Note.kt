@@ -16,5 +16,6 @@ data class Note(
     val longitude: Double,
     val latitude: Double,
     @ColumnInfo(name = "radius_m")
-    val radiusM: Int
+    val radiusM: Int,
+    val lifetime: Long
 )

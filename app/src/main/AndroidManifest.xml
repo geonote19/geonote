@@ -24,7 +24,7 @@
 
         <service android:name=".core.GeoService" />
 
-        <receiver android:name="com.scooter.geofence.GeofenceBroadcastReceiver" />
+        <receiver android:name=".core.geofence.GeofenceBroadcastReceiver" />
 
     </application>
 </manifest>
