@@ -2,41 +2,51 @@ package com.geonote.ui.notification
 
 import android.app.*
 import android.content.Context
-import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
+import androidx.navigation.NavDeepLinkBuilder
 import com.geonote.R
 import com.geonote.data.model.db.Note
-import com.geonote.ui.MainActivity
 
 const val CHANNEL_ID = "1"
 
 class Notification(val note: Note, val context: Context) {
 
-    val notificationManager =
+    private val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    val intent = Intent(context, MainActivity::class.java).putExtra("ID", note.id)
-    val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-    val title = note.title
-    val text = note.description
+    //val intent = Intent(context, MainActivity::class.java).putExtra("ID", note.id)
 
-    val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+    private val builder = NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_adb_black_24dp)
-        .setContentTitle(title)
-        .setContentText(text)
-        .setWhen(System.currentTimeMillis()).setShowWhen(true).setStyle(setNotificationStyle(note))
-        .setContentIntent(pendingIntent)
+        .setContentTitle(note.title)
+        .setContentText(note.description)
+        .setWhen(System.currentTimeMillis())
+        .setShowWhen(true)
+        .setStyle(setNotificationStyle(note))
+        .setContentIntent(createPendingIntent(note.id))
         .setAutoCancel(true)
-    val notification = builder.build()
+    private val notification = builder.build()
 
     fun showNotification() {
         notificationManager.notify(1, notification)
     }
 
-    fun setNotificationStyle(note: Note): NotificationCompat.BigTextStyle {
+    private fun createPendingIntent(id: Long): PendingIntent {
+        val bundle = Bundle()
+        bundle.putLong("ID", id)
+        return NavDeepLinkBuilder(context)
+            .setGraph(R.navigation.graph_main)
+            .setDestination(R.id.detailFragment)
+            .setArguments(bundle)
+            .createPendingIntent()
+    }
+
+
+    private fun setNotificationStyle(note: Note): NotificationCompat.BigTextStyle {
         val bigText: NotificationCompat.BigTextStyle = NotificationCompat.BigTextStyle()
         bigText.setBigContentTitle(note.title)
-        bigText.bigText("Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием Большой текст с описанием")
+        bigText.bigText(note.description)
         bigText.setSummaryText("Вы рядом!")
         return bigText
     }
