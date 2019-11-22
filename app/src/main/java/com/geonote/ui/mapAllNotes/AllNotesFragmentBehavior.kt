@@ -13,11 +13,13 @@ import com.geonote.databinding.FragmentAllNotesBinding
 import com.geonote.helper.VerticalSpaceItemDecoration
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
+import com.geonote.utils.toPixels
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_all_notes.*
 import kotlinx.android.synthetic.main.bottomsheet.allNotesMapRecycler
+import kotlinx.android.synthetic.main.toolbar.*
 
 class AllNotesFragmentBehavior :
     BaseFragment<FragmentAllNotesBinding, MapFragmentViewModel, MainActivity>(),
@@ -44,7 +46,7 @@ class AllNotesFragmentBehavior :
         allNotesMapRecycler.adapter = mAdapter
 
         allNotesMapRecycler.addItemDecoration(
-            VerticalSpaceItemDecoration(5)
+            VerticalSpaceItemDecoration(2.toPixels())
         )
 
         mapView.let {

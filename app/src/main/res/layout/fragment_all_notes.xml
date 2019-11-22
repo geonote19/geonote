@@ -2,23 +2,25 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.geonote.ui.mapAllNotes.MapFragmentViewModel" />
     </data>
 
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@drawable/note_item_bg"
         android:orientation="vertical"
         android:padding="8dp">
+        <include layout="@layout/toolbar" />
 
         <com.geonote.map.CustomMapView
             android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-       <include layout="@layout/bottomsheet"/>
+            android:layout_height="match_parent" />
+        <include layout="@layout/bottomsheet" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
