@@ -25,9 +25,11 @@
         </activity>
 
         <service android:name=".core.GeoService" />
+
+        <receiver android:name=".core.geofence.GeofenceBroadcastReceiver" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key"/>
-        <receiver android:name=".core.GeofenceBroadcastReceiver" />
     </application>
 </manifest>
