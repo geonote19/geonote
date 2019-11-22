@@ -5,6 +5,7 @@ import android.view.View
 import com.geonote.BR
 import com.geonote.R
 import com.geonote.databinding.FragmentDetailsMapBinding
+import com.geonote.helper.MapHelper
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
 import com.google.android.gms.maps.GoogleMap
@@ -18,6 +19,8 @@ class DetailsFragmentMap : BaseFragment<FragmentDetailsMapBinding, DetailFragmen
     override val mViewModelClass = DetailFragmentMapViewModel::class.java
     override val mLayoutId = R.layout.fragment_details_map
     override val mBindingVariable = BR.viewmodel
+
+    private var mMapHelper: MapHelper? = null
 
     val ZOOM_LEVEL = 10.0F
 
@@ -43,9 +46,6 @@ class DetailsFragmentMap : BaseFragment<FragmentDetailsMapBinding, DetailFragmen
 
     override fun onMapReady(googleMap: GoogleMap?) {
         googleMap ?: return
-        with(googleMap) {
-            moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom(LatLng(27.55, 53.90), ZOOM_LEVEL))
-            addMarker(com.google.android.gms.maps.model.MarkerOptions().position(LatLng(27.55, 53.90)))
-        }
+        mMapHelper = MapHelper(googleMap, context!!)
     }
 }
