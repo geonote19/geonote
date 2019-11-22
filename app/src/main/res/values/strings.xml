@@ -4,4 +4,5 @@
     <string name="title_request_permissions">Необходимо разрешение</string>
     <string name="text_request_permissions">Для корректной работы приложения необходимо разрешение</string>
     <string name="positive_button_permissions">Дать разрешение</string>
+    <string name="all_notes">Все заметки</string>
 </resources>
