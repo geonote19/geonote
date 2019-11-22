@@ -4,6 +4,7 @@ import android.content.Context
 import com.geonote.core.geofence.GeofenceManager
 import com.geonote.data.local.AppPrefDataSource
 import com.geonote.data.local.db.AppDataBase
+import com.geonote.data.model.Marker
 import com.geonote.data.model.db.Note
 import com.geonote.data.model.toMarker
 import kotlin.coroutines.resume
@@ -14,6 +15,21 @@ class AppRepository private constructor(
     private val mDataBase: AppDataBase,
     private val mGeoManager: GeofenceManager
 ) {
+
+    suspend fun updateMarkerLocation(marker: Marker): Unit = suspendCoroutine {
+        mDataBase.noteDao().run {
+            val note = getNoteById(marker.id)
+                .apply {
+                    this.latitude = marker.latitude
+                    this.latitude = marker.latitude
+                    this.longitude = marker.longitude
+                    this.lifetimeMs = marker.lifetimeMs
+                    this.radiusM = marker.radiusM
+                }
+            insertNote(note)
+            it.resume(Unit)
+        }
+    }
 
     /**
      * Run in the thread background

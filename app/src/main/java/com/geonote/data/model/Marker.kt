@@ -1,9 +1,9 @@
 package com.geonote.data.model
 
-class Marker(
+data class Marker(
     val id: Long,
-    val longitude: Double,
-    val latitude: Double,
+    var longitude: Double,
+    var latitude: Double,
     val radiusM: Int,
     val lifetimeMs: Long
 )

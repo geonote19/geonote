@@ -36,13 +36,19 @@ class AllNotesFragmentBehavior :
 
     private var clickListener: Listener? = null
 
+    private val mCallback = object : MapHelper.Companion.Callback {
+        override fun onMarkerPositionChanged(markerData: com.geonote.data.model.Marker) {
+            mViewModel.updateMarkerLocation(markerData)
+        }
+    }
+
     override fun onMapReady(googleMap: GoogleMap) {
-        mMapHelper = MapHelper(googleMap, context!!)
+        mMapHelper = MapHelper(googleMap, context!!, mCallback)
         mViewModel.noteData.observe(this, Observer {
             if (it.status == Status.SUCCESS) {
                 it.data?.let {
                     mAdapter.setData(it)
-                    mMapHelper!!.placeMarkers(it.map { it.toMarker() })
+                    mMapHelper?.placeMarkers(it.map { it.toMarker() })
                 }
             }
         })
