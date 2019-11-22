@@ -27,10 +27,44 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/buttonAddNew"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/buttonAddNew"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_note"
+            android:textColor="@android:color/black"
+            android:background="@drawable/note_action_bg"
+            android:foreground="@drawable/ripple"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSeeOnMap"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
+
+        <Button
+            android:id="@+id/buttonSeeOnMap"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/see_on_map"
+            android:textColor="@android:color/black"
+            android:background="@drawable/note_action_bg"
+            android:foreground="@drawable/ripple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="15dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
