@@ -1,53 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/mapDetailsPin">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapScreenDetails"
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.geonote.ui.detail.mapDetails.DetailFragmentMapViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mapDetailsPin"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCancel"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintTop_toTopOf="parent">
-    </com.google.android.gms.maps.MapView>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/note_action_bg"
-        android:foreground="@drawable/ripple"
-        android:text="Отменить"
-        android:textColor="@android:color/black"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSave"
-        app:layout_constraintWidth_percent="0.45"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintStart_toStartOf="parent" />
+        <com.geonote.map.CustomMapView
+            android:id="@+id/mapScreenDetails"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnCancel"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/note_action_bg"
-        android:foreground="@drawable/ripple"
-        android:text="Сохранить"
-        android:textColor="@android:color/black"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintWidth_percent="0.45"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-         />
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/note_action_bg"
+            android:foreground="@drawable/ripple"
+            android:text="Отменить"
+            android:textColor="@android:color/black"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnSave"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/note_action_bg"
+            android:foreground="@drawable/ripple"
+            android:text="Сохранить"
+            android:textColor="@android:color/black"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.45" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

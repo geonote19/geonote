@@ -9,25 +9,22 @@ import com.geonote.BR
 import com.geonote.R
 import com.geonote.data.model.Status
 import com.geonote.data.model.db.Note
+import com.geonote.data.model.toMarker
 import com.geonote.databinding.FragmentAllNotesBinding
+import com.geonote.helper.MapHelper
+import com.geonote.helper.VerticalSpaceItemDecoration
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
+import com.geonote.utils.toPixels
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.fragment_all_notes.*
 import kotlinx.android.synthetic.main.bottomsheet.*
-import kotlinx.android.synthetic.main.bottomsheet.allNotesMapRecycler
-import timber.log.Timber
+import kotlinx.android.synthetic.main.fragment_all_notes.*
 
 class AllNotesFragmentBehavior :
     BaseFragment<FragmentAllNotesBinding, MapFragmentViewModel, MainActivity>(),
     AllNotesAdapter.ClickListener, OnMapReadyCallback {
-
-
-    override fun onMapReady(p0: GoogleMap?) {
-
-    }
 
     override val mViewModelClass = MapFragmentViewModel::class.java
     override val mLayoutId: Int = R.layout.fragment_all_notes
@@ -35,8 +32,21 @@ class AllNotesFragmentBehavior :
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private lateinit var mAdapter: AllNotesAdapter
+    private var mMapHelper: MapHelper? = null
 
     private var clickListener: Listener? = null
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMapHelper = MapHelper(googleMap, context!!)
+        mViewModel.noteData.observe(this, Observer {
+            if (it.status == Status.SUCCESS) {
+                it.data?.let {
+                    mAdapter.setData(it)
+                    mMapHelper!!.placeMarkers(it.map { it.toMarker() })
+                }
+            }
+        })
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,27 +60,12 @@ class AllNotesFragmentBehavior :
             it.getMapAsync(this)
         }
 
-
         bottomSheetBehavior = BottomSheetBehavior.from(view.findViewById(R.id.bottomSheet))
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        Timber.e("FJVKSJFKVJFSKVMKSF")
+        allNotesMapRecycler.addItemDecoration(
+            VerticalSpaceItemDecoration(2.toPixels())
+        )
     }
-
-    override fun setupViewModel(viewModel: MapFragmentViewModel) {
-        super.setupViewModel(viewModel)
-        viewModel.noteData.observe(this, Observer {
-            when (it.status) {
-                Status.ERROR -> {
-                }
-                Status.LOADING -> {
-                }
-                Status.SUCCESS -> {
-                    mAdapter.setData(it.data!!)
-                }
-            }
-        })
-    }
-
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

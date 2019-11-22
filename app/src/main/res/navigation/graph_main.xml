@@ -46,7 +46,7 @@
 
     <fragment
         android:id="@+id/mapDetailsPin"
-        android:name="com.geonote.ui.detail.DetailsFragmentMap"
+        android:name="com.geonote.ui.detail.mapDetails.DetailsFragmentMap"
         android:label="mapDetailsPin"
         tools:layout="@layout/fragment_details_map">
         <argument
