@@ -1,22 +1,18 @@
 package com.geonote.ui.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.geonote.BR
 import com.geonote.R
 import com.geonote.databinding.FragmentDetailBinding
+import com.geonote.databinding.FragmentDetailsEditBinding
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_detail.*
-import kotlinx.android.synthetic.main.fragment_detail.mapPreview
 import kotlinx.android.synthetic.main.fragment_details_edit.*
 
-class DetailFragment :
-    BaseFragment<FragmentDetailBinding, DetailFragmentViewModel, MainActivity>() {
-    override val mViewModelClass = DetailFragmentViewModel::class.java
-    override val mLayoutId = R.layout.fragment_detail
+class EditDetailFragment : BaseFragment<FragmentDetailsEditBinding, EditDetailFragmentViewModel, MainActivity>() {
+    override val mViewModelClass = EditDetailFragmentViewModel::class.java
+    override val mLayoutId = R.layout.fragment_details_edit
     override val mBindingVariable = BR.viewmodel
 
     private var mNoteId = 0L
@@ -29,21 +25,19 @@ class DetailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        editNoteButton.setOnClickListener {
-            toEditDetailFragment(mNoteId)
-        }
+        mapPreview.setOnClickListener{toMapDetailFragment()}
     }
 
-    private fun toEditDetailFragment(noteId: Long) {
-        mActivity.toEditDetailFragment(noteId)
-    }
-
-    override fun setupViewModel(viewModel: DetailFragmentViewModel) {
+    override fun setupViewModel(viewModel: EditDetailFragmentViewModel) {
         super.setupViewModel(viewModel)
         viewModel.loadNote(mNoteId)
     }
 
-    fun save() {
+    fun save(){
 
+    }
+
+    fun toMapDetailFragment() {
+        mActivity.toMapDetailFragment(mNoteId)
     }
 }
