@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/mapDetailsPin">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapScreenDetails"
@@ -25,8 +26,11 @@
         android:text="Отменить"
         android:textColor="@android:color/black"
         app:layout_constrainedWidth="true"
-        app:layout_constraintHeight_percent="0.5"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSave"
+        app:layout_constraintWidth_percent="0.45"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -39,7 +43,9 @@
         android:text="Сохранить"
         android:textColor="@android:color/black"
         app:layout_constrainedWidth="true"
-        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintWidth_percent="0.45"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
          />

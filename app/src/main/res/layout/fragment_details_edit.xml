@@ -63,15 +63,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:text="Сохранить"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:textColor="@android:color/black"
             android:background="@drawable/note_action_bg"
             android:foreground="@drawable/ripple"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
