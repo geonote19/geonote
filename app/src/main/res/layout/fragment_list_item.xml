@@ -23,6 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/note_item_bg"
+            android:foreground="@drawable/ripple_item"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"

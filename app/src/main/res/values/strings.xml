@@ -4,4 +4,11 @@
     <string name="channel_name">Notification</string>
     <string name="channel_description">base notification</string>
     <string name="map_key">AIzaSyAonUnLwjB990hsIilfRIK_bzWfIfMzoNM</string>
+    <string name="title_request_permissions">Необходимо разрешение</string>
+    <string name="text_request_permissions">Для корректной работы приложения необходимо разрешение</string>
+    <string name="positive_button_permissions">Дать разрешение</string>
+    <string name="add_note">Добавить новую</string>
+    <string name="see_on_map">Показать на карте</string>
+    <string name="settings_title">Настройки</string>
+    <string name="all_notes">Все заметки</string>
 </resources>

@@ -25,6 +25,28 @@
         <argument
             android:name="noteId"
             app:argType="long" />
+        <action
+            android:id="@+id/action_to_edit_detailfragment"
+            app:destination="@id/editDetailFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/editDetailFragment"
+        android:name="com.geonote.ui.detail.EditDetailFragment"
+        android:label="editDetailFragment"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="noteId"
+            app:argType="long" />
+    </fragment>
+
+    <activity
+        android:id="@+id/mapActivity"
+        android:name="com.geonote.ui.mapAllNotes.MapActivity"
+        android:label="mapActivity"
+        tools:layout="@layout/activity_all_notes">
+
+    </activity>
+
 
 </navigation>
