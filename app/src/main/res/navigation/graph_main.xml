@@ -27,4 +27,13 @@
             app:argType="long" />
     </fragment>
 
+    <activity
+        android:id="@+id/mapActivity"
+        android:name="com.geonote.ui.mapAllNotes.MapActivity"
+        android:label="mapActivity"
+        tools:layout="@layout/activity_all_notes">
+
+    </activity>
+
+
 </navigation>

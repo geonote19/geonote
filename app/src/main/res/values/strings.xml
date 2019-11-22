@@ -8,4 +8,5 @@
     <string name="add_note">Добавить новую</string>
     <string name="see_on_map">Показать на карте</string>
     <string name="settings_title">Настройки</string>
+    <string name="all_notes">Все заметки</string>
 </resources>

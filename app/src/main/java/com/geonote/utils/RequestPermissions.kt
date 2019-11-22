@@ -87,7 +87,7 @@ class RequestPermissions(
             showCustomDialog(
                 !shouldShowRequestPermissionRationale(
                     activity,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
+                    Manifest.permission.ACCESS_FINE_LOCATION
                 ),
                 text
             )
