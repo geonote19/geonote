@@ -15,20 +15,16 @@ class AppRepository private constructor(
     private val mGeoManager: GeofenceManager
 ) {
 
-    suspend fun restoreMarkers(): Boolean =
-        suspendCoroutine {
-            try {
-                val markerList = mDataBase.noteDao().getAllNotes()
-                    .map { it.toMarker() }
-                for (marker in markerList) {
-                    mGeoManager.addOrUpdateMarker(marker)
-                }
-                it.resume(true)
-            } catch (ex: Exception) {
-                it.resume(false)
-            }
+    /**
+     * Run in the thread background
+     */
+    fun restoreMarkers() {
+        val markerList = mDataBase.noteDao().getAllNotes()
+            .map { it.toMarker() }
+        for (marker in markerList) {
+            mGeoManager.addOrUpdateMarker(marker)
         }
-
+    }
 
     suspend fun getNoteList(): List<Note> =
         suspendCoroutine {

@@ -11,8 +11,6 @@ import timber.log.Timber
 class BootBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
         Timber.d("Restore markers after boot")
-        GlobalScope.launch {
-            AppRepository.getInstance(context).restoreMarkers()
-        }
+        RestoreJobIntentService.enqueueWork(context)
     }
 }
