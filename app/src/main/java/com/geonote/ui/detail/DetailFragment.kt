@@ -1,17 +1,13 @@
 package com.geonote.ui.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.geonote.BR
 import com.geonote.R
 import com.geonote.databinding.FragmentDetailBinding
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_detail.*
-import kotlinx.android.synthetic.main.fragment_detail.mapPreview
-import kotlinx.android.synthetic.main.fragment_details_edit.*
 
 class DetailFragment :
     BaseFragment<FragmentDetailBinding, DetailFragmentViewModel, MainActivity>() {
@@ -43,7 +39,7 @@ class DetailFragment :
         viewModel.loadNote(mNoteId)
     }
 
-    fun save() {
-
+    companion object {
+        const val PARAM_ID = "noteId"
     }
 }

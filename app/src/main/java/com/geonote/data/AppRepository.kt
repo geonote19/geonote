@@ -27,6 +27,7 @@ class AppRepository private constructor(
                     this.radiusM = marker.radiusM
                 }
             insertNote(note)
+            mGeoManager.addOrUpdateMarker(marker)
             it.resume(Unit)
         }
     }
