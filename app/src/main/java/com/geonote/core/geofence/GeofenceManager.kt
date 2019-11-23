@@ -22,13 +22,13 @@ class GeofenceManager private constructor(context: Context) : AbstractGeoManager
     }
 
     override fun addOrUpdateMarker(marker: Marker) {
-        val currentDate = Date().time
-        if(currentDate < marker.dateTo && currentDate > marker.dateFrom) {
+        val currentTime = Date().time
+        if (currentTime in marker.dateFrom until marker.dateFrom) {
 
             val geofence = Geofence.Builder()
                 .setRequestId(marker.id.toString())
                 .setCircularRegion(marker.latitude, marker.longitude, marker.radiusM.toFloat())
-                .setExpirationDuration(currentDate - marker.dateTo)
+                .setExpirationDuration(marker.dateTo - currentTime)
                 .setTransitionTypes(
                     Geofence.GEOFENCE_TRANSITION_ENTER
                             or Geofence.GEOFENCE_TRANSITION_EXIT

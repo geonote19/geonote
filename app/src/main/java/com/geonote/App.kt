@@ -1,6 +1,7 @@
 package com.geonote
 
 import android.app.Application
+import com.geonote.ui.notification.NotifManager
 import timber.log.Timber
 
 class App : Application() {
@@ -11,6 +12,7 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        NotifManager.getInstance().createNotificationChannel()
     }
 
     companion object {

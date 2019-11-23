@@ -12,4 +12,5 @@
     <string name="see_on_map">Show on the card</string>
     <string name="settings_title">Settings</string>
     <string name="all_notes">All notes</string>
+    <string name="you_are_near">You are near!</string>
 </resources>

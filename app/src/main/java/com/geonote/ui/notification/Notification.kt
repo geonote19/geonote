@@ -1,65 +1,88 @@
 package com.geonote.ui.notification
 
-import android.app.*
+import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.navigation.NavDeepLinkBuilder
+import com.geonote.App
 import com.geonote.R
 import com.geonote.data.model.db.Note
+import com.geonote.ui.detail.DetailFragment
+import com.geonote.utils.RUtils
 
-const val CHANNEL_ID = "1"
+class NotifManager private constructor(private var mContext: Context = App.INSTANCE) {
 
-class Notification(val note: Note, val context: Context) {
+    private val notificationManager
+        get() = mContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    private val notificationManager =
-        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    //val intent = Intent(context, MainActivity::class.java).putExtra("ID", note.id)
+    private fun getNotificationStyle(note: Note) =
+        NotificationCompat.BigTextStyle()
+            .setBigContentTitle(note.title)
+            .bigText(note.description)
+            .setSummaryText(RUtils.getString(R.string.you_are_near))
 
-    private val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-        .setSmallIcon(R.drawable.ic_adb_black_24dp)
-        .setContentTitle(note.title)
-        .setContentText(note.description)
-        .setWhen(System.currentTimeMillis())
-        .setShowWhen(true)
-        .setStyle(setNotificationStyle(note))
-        .setContentIntent(createPendingIntent(note.id))
-        .setAutoCancel(true)
-    private val notification = builder.build()
+    private fun createNotification(note: Note) =
+        NotificationCompat.Builder(mContext, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_adb_black_24dp)
+            .setContentTitle(note.title)
+            .setContentText(note.description)
+            .setWhen(System.currentTimeMillis())
+            .setShowWhen(true)
+            .setStyle(getNotificationStyle(note))
+            .setContentIntent(createPendingIntent(note))
+            .setAutoCancel(true)
+            .build()
 
-    fun showNotification() {
-        notificationManager.notify(1, notification)
-    }
-
-    private fun createPendingIntent(id: Long): PendingIntent {
-        val bundle = Bundle()
-        bundle.putLong("ID", id)
-        return NavDeepLinkBuilder(context)
+    private fun createPendingIntent(note: Note): PendingIntent {
+        val bundle = Bundle().apply {
+            putLong(DetailFragment.PARAM_ID, note.id)
+        }
+        return NavDeepLinkBuilder(mContext)
             .setGraph(R.navigation.graph_main)
             .setDestination(R.id.detailFragment)
             .setArguments(bundle)
             .createPendingIntent()
     }
 
-
-    private fun setNotificationStyle(note: Note): NotificationCompat.BigTextStyle {
-        val bigText: NotificationCompat.BigTextStyle = NotificationCompat.BigTextStyle()
-        bigText.setBigContentTitle(note.title)
-        bigText.bigText(note.description)
-        bigText.setSummaryText("Вы рядом!")
-        return bigText
+    fun showNotification(note: Note) {
+        notificationManager.notify(note.id.toInt(), createNotification(note))
     }
 
     fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Channel 1"
-            val descriptionText = "notification channel"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-                description = descriptionText
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = CHANNEL_DESCRIPTION
             }
             notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        private var INSTANCE: NotifManager? = null
+        private const val CHANNEL_ID = "geonote_id"
+        private const val CHANNEL_NAME = "geonote_channel"
+        private const val CHANNEL_DESCRIPTION = "geonote near position"
+
+
+        fun getInstance(): NotifManager {
+            if (INSTANCE == null) {
+                synchronized(this) {
+                    if (INSTANCE == null) {
+                        INSTANCE = NotifManager()
+                    }
+                }
+            }
+            return INSTANCE!!
         }
     }
 }

@@ -10,7 +10,6 @@ import com.geonote.data.model.db.Note
 import com.geonote.databinding.FragmentListBinding
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
-import com.geonote.ui.notification.Notification
 import com.geonote.utils.addDays
 import kotlinx.android.synthetic.main.fragment_list.*
 import java.util.*
@@ -26,9 +25,6 @@ class ListFragment : BaseFragment<FragmentListBinding, ListFragmentViewModel, Ma
     private val mOnNoteClickListener = object : ListFragmentAdapter.Companion.Callback {
         override fun onItemClick(note: Note) {
             toDetailFragment(note.id)
-            val notification: Notification = activity!!.baseContext.let { Notification(note, it) }
-            notification.createNotificationChannel()
-            notification.showNotification()
         }
     }
 

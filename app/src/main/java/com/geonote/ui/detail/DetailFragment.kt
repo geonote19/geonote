@@ -51,7 +51,7 @@ class DetailFragment :
         viewModel.loadNote(mNoteId)
     }
 
-    fun save() {
-
+    companion object {
+        const val PARAM_ID = "noteId"
     }
 }
