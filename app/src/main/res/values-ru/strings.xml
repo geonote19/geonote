@@ -15,4 +15,6 @@
     <string name="description_hint">ВВЕДИТЕ ОПИСАНИЕ</string>
     <string name="place_marker">Поставить метку</string>
     <string name="place_marker_please">Разместите метку на карте</string>
+    <string name="onCloseText">Подтверждение выхода</string>
+    <string name="onCloseMessage">Вы уверены?</string>
 </resources>

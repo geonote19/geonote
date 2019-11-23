@@ -20,6 +20,7 @@ import com.geonote.ui.mapAllNotes.AllNotesFragmentBehavior
 import com.geonote.utils.CustomViewOutlineProvider
 import com.geonote.utils.RequestPermissions
 import com.geonote.utils.applyDefaultOutlineProvider
+import com.geonote.utils.setSystemBarTheme
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
@@ -49,9 +50,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
             if (currentFragment !is AllNotesFragmentBehavior) {
                 toMapActivity()
             }
+            setSystemBarTheme(true, window)
+            window.statusBarColor = Color.WHITE
 
         }
+
         buttonMenu.setOnClickListener {
+            setSystemBarTheme(false,window)
+            window.statusBarColor = resources.getColor(R.color.colorToolbar)
             if (currentFragment !is ListFragment) {
                 toListFragment()
             }
@@ -89,11 +95,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     override fun onStart() {
         if (requestPermission.ifHasPermissions()) Timber.e("Permissions")
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.statusBarColor = resources.getColor(R.color.colorToolbar)
-            window.navigationBarColor = Color.WHITE
-        }
+        window.statusBarColor = resources.getColor(R.color.colorToolbar)
         super.onStart()
     }
 
@@ -102,6 +104,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         bottomSheetMain.applyDefaultOutlineProvider(CustomViewOutlineProvider.RoundedArea.TOP)
         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         buttonAdd.setOnClickListener {
+            setSystemBarTheme(false,window)
+            window.statusBarColor = resources.getColor(R.color.colorToolbar)
             mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
     }

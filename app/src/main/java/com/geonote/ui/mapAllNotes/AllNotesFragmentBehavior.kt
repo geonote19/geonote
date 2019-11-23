@@ -1,6 +1,8 @@
 package com.geonote.ui.mapAllNotes
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
@@ -101,6 +103,31 @@ class AllNotesFragmentBehavior :
         allNotesMapRecycler.addItemDecoration(
             VerticalSpaceItemDecoration(2.toPixels())
         )
+
+        searchBottomSheet.addTextChangedListener(
+
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    mAdapter.searchList(s.toString())
+
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                }
+            })
 
         mapView.let {
             lifecycle.addObserver(it)

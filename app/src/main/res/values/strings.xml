@@ -20,6 +20,8 @@
     <string name="description_hint">ENTER DESCRIPTION</string>
     <string name="place_marker">Place marker</string>
     <string name="place_marker_please">Place marker on map</string>
+    <string name="onCloseText">Exit Confirm</string>
+    <string name="onCloseMessage">Are you sure?</string>
 
     <string-array name="choose_colors">
         <item>#FF00FF</item>
