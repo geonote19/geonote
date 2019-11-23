@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.geonote.ViewModelFactory
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel, A : BaseActivity<*, *>> :
@@ -45,6 +48,14 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel, A : BaseActi
         savedInstanceState: Bundle?
     ): View {
         mViewDataBinding = DataBindingUtil.inflate(inflater, mLayoutId, container, false)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this@BaseFragment, object :
+            OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
+            }
+        })
+
         return mViewDataBinding.root
     }
 
