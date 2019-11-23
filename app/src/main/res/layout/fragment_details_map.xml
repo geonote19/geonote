@@ -47,7 +47,7 @@
             android:layout_marginBottom="30dp"
             android:background="@drawable/note_action_bg"
             android:foreground="@drawable/ripple"
-            android:text="Сохранить"
+            android:text="Установить"
             android:textColor="@android:color/black"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"

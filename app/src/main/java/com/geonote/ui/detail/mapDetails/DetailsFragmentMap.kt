@@ -31,7 +31,7 @@ class DetailsFragmentMap :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btnCancel.setOnClickListener { Navigation.findNavController(view!!).navigateUp() }
+        btnCancel.setOnClickListener { Navigation.findNavController(view).navigateUp() }
 
         mapScreenDetails.let {
             lifecycle.addObserver(it)
