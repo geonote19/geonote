@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.geonote.ui.detail.EditDetailFragmentViewModel" />
+            type="com.geonote.ui.detail.edit.EditDetailFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,6 +44,7 @@
 
 
         <EditText
+            android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"

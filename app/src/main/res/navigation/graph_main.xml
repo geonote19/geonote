@@ -31,12 +31,12 @@
 
     <fragment
         android:id="@+id/editDetailFragment"
-        android:name="com.geonote.ui.detail.EditDetailFragment"
+        android:name="com.geonote.ui.detail.edit.EditDetailFragment"
         android:label="editDetailFragment"
         tools:layout="@layout/fragment_detail">
         <argument
-            android:name="noteId"
-            app:argType="long" />
+            android:name="note"
+            app:argType="com.geonote.data.model.db.Note" />
         <action
             android:id="@+id/mapPreview"
             app:destination="@+id/mapDetailsPin"

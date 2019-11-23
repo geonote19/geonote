@@ -63,4 +63,8 @@ class ListFragment : BaseFragment<FragmentListBinding, ListFragmentViewModel, Ma
         })
     }
 
+    override fun onResume() {
+        mViewModel.load()
+        super.onResume()
+    }
 }

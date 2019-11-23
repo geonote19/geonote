@@ -1,20 +1,15 @@
 package com.geonote.ui
 
 import android.Manifest
-import android.content.res.Resources
-import android.graphics.Color
 import android.os.Build
-import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.geonote.BR
 import com.geonote.GraphMainDirections
 import com.geonote.R
+import com.geonote.data.model.db.Note
 import com.geonote.databinding.ActivityMainBinding
 import com.geonote.ui.base.BaseActivity
-import com.geonote.ui.detail.DetailFragmentArgs
-import com.geonote.ui.detail.DetailFragmentDirections
-import com.geonote.ui.detail.EditDetailFragmentDirections
-import com.geonote.ui.list.ListFragmentDirections
+import com.geonote.ui.detail.edit.EditDetailFragmentDirections
 import com.geonote.utils.RequestPermissions
 import kotlinx.android.synthetic.main.toolbar.*
 import timber.log.Timber
@@ -65,13 +60,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         mNavController?.navigate(action)
     }
 
-    fun toEditDetailFragment(noteId: Long) {
-        val action = GraphMainDirections.actionToEditDetailfragment(noteId)
+    fun toEditDetailFragment(note: Note) {
+        val action = GraphMainDirections.actionToEditDetailfragment(note)
         mNavController!!.navigate(action)
     }
 
     fun toDetailFragment(noteId: Long) {
-        val action =  GraphMainDirections.actionToDetailfragment(noteId)
+        val action = GraphMainDirections.actionToDetailfragment(noteId)
         mNavController!!.navigate(action)
     }
 

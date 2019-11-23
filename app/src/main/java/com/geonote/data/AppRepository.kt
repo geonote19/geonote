@@ -62,6 +62,12 @@ class AppRepository private constructor(
             it.resume(Unit)
         }
 
+    suspend fun mergeNote(note: Note): Unit =
+        suspendCoroutine {
+            mDataBase.noteDao().insertNote(note)
+            it.resume(Unit)
+        }
+
     companion object {
         private var INSTANCE: AppRepository? = null
 

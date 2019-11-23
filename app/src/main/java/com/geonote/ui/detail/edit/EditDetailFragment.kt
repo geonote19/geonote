@@ -1,15 +1,16 @@
-package com.geonote.ui.detail
+package com.geonote.ui.detail.edit
 
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.DatePicker
 import android.widget.Toast
 import com.geonote.BR
 import com.geonote.R
+import com.geonote.data.model.db.Note
 import com.geonote.databinding.FragmentDetailsEditBinding
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
+import com.geonote.utils.addDays
 import kotlinx.android.synthetic.main.fragment_details_edit.*
 import java.util.*
 
@@ -20,12 +21,22 @@ class EditDetailFragment :
     override val mLayoutId = R.layout.fragment_details_edit
     override val mBindingVariable = BR.viewmodel
 
-    private var mNoteId = 0L
+    private var mNote = Note(
+        1,
+        "Цветы на др ксюхи",
+        "Структурал",
+        "",
+        53.899604,
+        27.557117,
+        100,
+        Date().addDays(-1).time,
+        Date().addDays(2).time
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val args = EditDetailFragmentArgs.fromBundle(arguments!!)
-        mNoteId = args.noteId
+        mNote = args.note
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,15 +49,17 @@ class EditDetailFragment :
 
     override fun setupViewModel(viewModel: EditDetailFragmentViewModel) {
         super.setupViewModel(viewModel)
-        viewModel.loadNote(mNoteId)
+        viewModel.note.postValue(mNote)
     }
 
     private fun save() {
-        mViewModel.save()
+        mNote.title = title.editableText.toString()
+        mNote.description = description.editableText.toString()
+        mViewModel.save(mNote)
         Toast.makeText(mActivity, "Сохранено", Toast.LENGTH_SHORT).show()
     }
 
     fun toMapDetailFragment() {
-        mActivity.toMapDetailFragment(mNoteId)
+        mActivity.toMapDetailFragment(mNote.id)
     }
 }
