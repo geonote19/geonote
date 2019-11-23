@@ -18,6 +18,7 @@ import com.geonote.ui.list.ListFragment
 import com.geonote.ui.mapAllNotes.AllNotesFragmentBehavior
 import com.geonote.utils.RequestPermissions
 import com.geonote.utils.addDays
+import com.geonote.utils.setSystemBarTheme
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
@@ -42,18 +43,24 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         setupNavigationBar()
         super.onCreate(savedInstanceState)
         buttonMap.setOnClickListener {
-            if(currentFragment !is AllNotesFragmentBehavior){
+            if (currentFragment !is AllNotesFragmentBehavior) {
                 toMapActivity()
             }
+            setSystemBarTheme(true,window)
+            window.statusBarColor = Color.WHITE
 
         }
 
         buttonMenu.setOnClickListener {
-            if(currentFragment !is ListFragment) {
+            setSystemBarTheme(false,window)
+            window.statusBarColor = resources.getColor(R.color.colorToolbar)
+            if (currentFragment !is ListFragment) {
                 toListFragment()
             }
         }
         buttonAdd.setOnClickListener {
+            setSystemBarTheme(false,window)
+            window.statusBarColor = resources.getColor(R.color.colorToolbar)
             var newNote = Note(
                 0,
                 "",
@@ -72,11 +79,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     override fun onStart() {
         if (requestPermission.ifHasPermissions()) Timber.e("Permissions")
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.statusBarColor = resources.getColor(R.color.colorToolbar)
-            window.navigationBarColor = Color.WHITE
-        }
+        window.statusBarColor = resources.getColor(R.color.colorToolbar)
         super.onStart()
     }
 
