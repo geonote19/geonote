@@ -13,7 +13,7 @@ abstract class NoteDao {
     abstract fun getNoteById(id: Long): Note
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertNote(note: Note)
+    abstract fun insertNote(note: Note): Long
 
     @Delete
     abstract fun removeNote(note: Note)

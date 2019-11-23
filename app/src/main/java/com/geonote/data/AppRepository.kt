@@ -34,6 +34,14 @@ class AppRepository private constructor(
         }
     }
 
+    suspend fun addNote(note: Note): Long = suspendCoroutine {
+        mDataBase.noteDao().run {
+            val insertedId =insertNote(note)
+            mGeoManager.addOrUpdateMarker(note.toMarker())
+            it.resume(insertedId)
+        }
+    }
+
     /**
      * Run in the thread background
      */

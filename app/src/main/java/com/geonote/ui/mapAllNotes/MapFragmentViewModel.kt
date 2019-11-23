@@ -28,17 +28,18 @@ class MapFragmentViewModel(
         }
     }
 
+    fun addNote(note: Note, block: (Long) -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            block(mAppRepository.addNote(note))
+        }
+    }
+
     fun getNoteById(id: Long, block: (Note) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             block(mAppRepository.getNoteById(id))
         }
     }
 
-    fun addNote(note: Note) {
-        viewModelScope.launch(Dispatchers.IO) {
-            mAppRepository.mergeNote(note)
-        }
-    }
 
     init {
         requestWithLiveData(noteDataMutable) {

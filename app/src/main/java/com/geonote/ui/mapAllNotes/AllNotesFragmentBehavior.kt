@@ -46,10 +46,13 @@ class AllNotesFragmentBehavior :
             if (mNoteForSaving != null) {
                 mNoteForSaving!!.latitude = latitude
                 mNoteForSaving!!.longitude = longitude
-                val marker = mNoteForSaving!!.toMarker()
-                mViewModel.updateMarkerLocation(marker)
-                mMapHelper?.placeMarkers(listOf(marker))
-                mNoteForSaving = null
+                mViewModel.addNote(mNoteForSaving!!) {
+                    mNoteForSaving!!.id = it
+                    App.handler.post {
+                        mMapHelper?.placeMarkers(listOf(mNoteForSaving!!.toMarker()))
+                        mNoteForSaving = null
+                    }
+                }
             }
         }
 
