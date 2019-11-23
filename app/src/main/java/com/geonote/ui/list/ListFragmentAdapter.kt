@@ -14,7 +14,8 @@ class ListFragmentAdapter(
     private val mCallback: Callback
 ) : RecyclerView.Adapter<ListFragmentAdapter.ViewHolder>() {
 
-    private val mData = mutableListOf<Note>()
+    private var mData = mutableListOf<Note>()
+    private val newData = mutableListOf<Note>()
     private val mInflater = LayoutInflater.from(context)
 
     override fun getItemCount() = mData.size
@@ -34,6 +35,18 @@ class ListFragmentAdapter(
     fun setData(data: List<Note>) {
         mData.clear()
         mData.addAll(data)
+        newData.addAll(data)
+        notifyDataSetChanged()
+    }
+
+    fun searchList(search: String) {
+        mData = newData
+        mData = mData.filter {
+            (it.title.contains(
+                search,
+                true
+            ))
+        }.toMutableList()
         notifyDataSetChanged()
     }
 

@@ -24,7 +24,7 @@
 
             <fragment
                 android:id="@+id/navHostFragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:name="com.geonote.core.CustomNavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:defaultNavHost="true"

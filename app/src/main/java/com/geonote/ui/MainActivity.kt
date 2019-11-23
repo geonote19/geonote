@@ -13,6 +13,8 @@ import com.geonote.R
 import com.geonote.data.model.db.Note
 import com.geonote.databinding.ActivityMainBinding
 import com.geonote.ui.base.BaseActivity
+import com.geonote.ui.list.ListFragment
+import com.geonote.ui.mapAllNotes.AllNotesFragmentBehavior
 import com.geonote.utils.RequestPermissions
 import com.geonote.utils.addDays
 import com.google.android.gms.maps.model.LatLng
@@ -39,10 +41,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         setupNavigationBar()
         super.onCreate(savedInstanceState)
         buttonMap.setOnClickListener {
-            toMapActivity()
+            if(currentFragment !is AllNotesFragmentBehavior){
+                toMapActivity()
+            }
+
         }
         buttonMenu.setOnClickListener {
-            toListFragment()
+            if(currentFragment !is ListFragment) {
+                toListFragment()
+            }
         }
         buttonAdd.setOnClickListener {
             var newNote = Note(
