@@ -7,5 +7,6 @@ data class Marker(
     val radiusM: Int,
     val dateFrom: Long,
     val dateTo: Long,
-    val title: String
+    val title: String,
+    val color: Int
 )

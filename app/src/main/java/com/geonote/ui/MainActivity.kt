@@ -11,7 +11,6 @@ import com.geonote.databinding.ActivityMainBinding
 import com.geonote.ui.base.BaseActivity
 import com.geonote.ui.detail.edit.EditDetailFragmentDirections
 import com.geonote.utils.RequestPermissions
-import kotlinx.android.synthetic.main.toolbar.*
 import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
@@ -32,7 +31,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     override fun onStart() {
         if (requestPermission.ifHasPermissions()) Timber.e("Permissions")
-        setSupportActionBar(toolbar)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = resources.getColor(R.color.colorToolbar)

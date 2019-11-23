@@ -18,6 +18,6 @@ data class Note (
     @ColumnInfo(name = "radius_m")
     var radiusM: Int,
     var dateFrom: Long,
-    var dateTo: Long
-
+    var dateTo: Long,
+    val color: Int
 ): Serializable

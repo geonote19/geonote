@@ -2,6 +2,7 @@ package com.geonote.views
 
 import android.content.Context
 import android.graphics.Color
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.FrameLayout
@@ -44,10 +45,12 @@ class ColoredTextView : FrameLayout {
 
         mTextView = TextView(context)
             .apply {
+                isSingleLine = true
+                ellipsize = TextUtils.TruncateAt.END
                 setPadding(15.toPixels(), 0, 10.toPixels(), 0)
                 setBackgroundResource(R.drawable.colored_text_view_text_background)
                 setTextColor(Color.BLACK)
-                textSize = 25F
+                textSize = 18F
                 gravity = Gravity.CENTER_VERTICAL
             }
         val params = MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)

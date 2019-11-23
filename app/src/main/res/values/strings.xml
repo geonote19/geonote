@@ -13,6 +13,7 @@
     <string name="settings_title">Settings</string>
     <string name="all_notes">All notes</string>
     <string name="you_are_near">You are near!</string>
+    <string name="search_hint">SEARCH</string>
 
     <string-array name="choose_colors">
         <item>#FF00FF</item>

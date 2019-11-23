@@ -8,4 +8,5 @@
     <string name="settings_title">Настройки</string>
     <string name="all_notes">Все заметки</string>
     <string name="you_are_near">Вы рядом!</string>
+    <string name="search_hint">ПОИСК</string>
 </resources>

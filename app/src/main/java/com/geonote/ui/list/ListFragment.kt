@@ -3,13 +3,16 @@ package com.geonote.ui.list
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.geonote.BR
 import com.geonote.R
 import com.geonote.data.model.Status
 import com.geonote.data.model.db.Note
 import com.geonote.databinding.FragmentListBinding
+import com.geonote.helper.VerticalSpaceItemDecoration
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
+import com.geonote.utils.toPixels
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : BaseFragment<FragmentListBinding, ListFragmentViewModel, MainActivity>() {
@@ -30,6 +33,7 @@ class ListFragment : BaseFragment<FragmentListBinding, ListFragmentViewModel, Ma
         super.onViewCreated(view, savedInstanceState)
         mAdapter = ListFragmentAdapter(context!!, mOnNoteClickListener)
         recyclerView.adapter = mAdapter
+        recyclerView.addItemDecoration(VerticalSpaceItemDecoration(2.toPixels()))
         buttonSeeOnMap.setOnClickListener {
             toMapActivity()
         }

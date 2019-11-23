@@ -1,5 +1,6 @@
 package com.geonote.ui.detail.edit
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -30,7 +31,8 @@ class EditDetailFragment :
         27.557117,
         100,
         Date().addDays(-1).time,
-        Date().addDays(2).time
+        Date().addDays(2).time,
+        Color.RED
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
