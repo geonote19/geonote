@@ -13,4 +13,12 @@
     <string name="settings_title">Settings</string>
     <string name="all_notes">All notes</string>
     <string name="you_are_near">You are near!</string>
+
+    <string-array name="choose_colors">
+        <item>#FF00FF</item>
+        <item>#00FF00</item>
+        <item>#0000FF</item>
+        <item>#FF0000</item>
+        <item>#FFFF00</item>
+    </string-array>
 </resources>
