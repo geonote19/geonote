@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import com.geonote.R
-import com.geonote.map.CustomMarkerInfoWindowView
 import com.geonote.ui.detail.mapDetails.BitmapConsumer
 import com.geonote.utils.SystemUtils
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -20,7 +19,6 @@ class MapHelper(
 
     init {
         with(mMap) {
-            setInfoWindowAdapter(CustomMarkerInfoWindowView(context))
             setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style))
             moveCamera(
                 CameraUpdateFactory.newLatLngZoom(
@@ -31,16 +29,12 @@ class MapHelper(
             if (SystemUtils.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 isMyLocationEnabled = true
             }
-            setOnInfoWindowClickListener {
-                (it.tag as? com.geonote.data.model.Marker)?.let {
-                    mCallback?.onMarkerClicked(it)
-                }
-            }
         }
+        addOnMarkerClickListener()
         addOnMarkerDragListener()
     }
 
-    fun takeSnapshot(consumer:BitmapConsumer ){
+    fun takeSnapshot(consumer: BitmapConsumer) {
 
         mMap.snapshot {
             consumer.consume(it)
@@ -64,6 +58,16 @@ class MapHelper(
         })
     }
 
+    private fun addOnMarkerClickListener() {
+        mMap.setOnMarkerClickListener {
+            (it.tag as? com.geonote.data.model.Marker)?.let {
+                mCallback?.onMarkerClicked(it)
+                return@setOnMarkerClickListener true
+            }
+            false
+        }
+    }
+
     fun placeMarkers(markerDataList: List<com.geonote.data.model.Marker>) {
         for (markerData in markerDataList) {
             addMarker(markerData).tag = markerData
@@ -78,7 +82,7 @@ class MapHelper(
         mMap.animateCamera(cameraUpdate)
     }
 
-    fun chooseCoordinates(markers:MutableList<LatLng>){
+    fun chooseCoordinates(markers: MutableList<LatLng>) {
         mMap.setOnMapClickListener {
             markers.clear()
             markers.add(it)
@@ -91,7 +95,6 @@ class MapHelper(
         mMap.addMarker(
             MarkerOptions()
                 .position(LatLng(markerData.latitude, markerData.longitude))
-                .title(markerData.title)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker))
                 .draggable(true)
         )

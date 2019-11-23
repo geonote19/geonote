@@ -11,6 +11,7 @@ import com.geonote.data.model.db.Note
 import com.geonote.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MapFragmentViewModel(
     application: Application,
@@ -24,6 +25,12 @@ class MapFragmentViewModel(
     fun updateMarkerLocation(marker: Marker) {
         viewModelScope.launch(Dispatchers.IO) {
             mAppRepository.updateMarkerLocation(marker)
+        }
+    }
+
+    fun getNoteById(id: Long, block: (Note) -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            block(mAppRepository.getNoteById(id))
         }
     }
 
