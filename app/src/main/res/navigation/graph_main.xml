@@ -14,8 +14,17 @@
         app:destination="@id/editDetailFragment" />
 
     <action
+        android:id="@+id/action_to_map_fragment"
+        app:destination="@id/mapFragment" />
+
+    <action
         android:id="@+id/mapPreview"
         app:destination="@+id/mapDetailsPin"
+        />
+
+    <action
+        android:id="@+id/btnCancel"
+        app:destination="@+id/editDetailFragment"
         />
 
     <stackless_fragment
@@ -59,6 +68,11 @@
         android:id="@+id/mapFragment"
         android:name="com.geonote.ui.mapAllNotes.AllNotesFragmentBehavior"
         android:label="mapFragment"
-        tools:layout="@layout/fragment_all_notes" />
+        tools:layout="@layout/fragment_all_notes" >
+        <argument
+            android:name="note"
+            app:argType="com.geonote.data.model.db.Note"
+            app:nullable="true" />
+    </stackless_fragment>
 
 </navigation>

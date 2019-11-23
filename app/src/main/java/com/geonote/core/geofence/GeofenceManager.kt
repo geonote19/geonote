@@ -22,31 +22,27 @@ class GeofenceManager private constructor(context: Context) : AbstractGeoManager
     }
 
     override fun addOrUpdateMarker(marker: Marker) {
-        val currentTime = Date().time
-        if (currentTime in marker.dateFrom until marker.dateFrom) {
+        val geofence = Geofence.Builder()
+            .setRequestId(marker.id.toString())
+            .setCircularRegion(marker.latitude, marker.longitude, marker.radiusM.toFloat())
+            .setExpirationDuration(marker.dateTo)
+            .setTransitionTypes(
+                Geofence.GEOFENCE_TRANSITION_ENTER
+                        or Geofence.GEOFENCE_TRANSITION_EXIT
+            )
+            .build()
 
-            val geofence = Geofence.Builder()
-                .setRequestId(marker.id.toString())
-                .setCircularRegion(marker.latitude, marker.longitude, marker.radiusM.toFloat())
-                .setExpirationDuration(marker.dateTo - currentTime)
-                .setTransitionTypes(
-                    Geofence.GEOFENCE_TRANSITION_ENTER
-                            or Geofence.GEOFENCE_TRANSITION_EXIT
-                )
-                .build()
+        val geofencingRequest = GeofencingRequest.Builder()
+            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+            .addGeofence(geofence)
+            .build()
 
-            val geofencingRequest = GeofencingRequest.Builder()
-                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
-                .addGeofence(geofence)
-                .build()
-
-            mGeofencingClient.addGeofences(geofencingRequest, geofencePendingIntent).run {
-                addOnSuccessListener {
-                    Timber.d("Marker was successfully added")
-                }
-                addOnFailureListener {
-                    Timber.e(it, "Error during adding a marker")
-                }
+        mGeofencingClient.addGeofences(geofencingRequest, geofencePendingIntent).run {
+            addOnSuccessListener {
+                Timber.d("Marker was successfully added")
+            }
+            addOnFailureListener {
+                Timber.e(it, "Error during adding a marker")
             }
         }
     }

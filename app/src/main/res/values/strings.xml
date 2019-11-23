@@ -16,6 +16,10 @@
     <string name="details_new_note">Description</string>
     <string name="you_are_near">You are near!</string>
     <string name="search_hint">SEARCH</string>
+    <string name="title_hint">ENTER TITLE</string>
+    <string name="description_hint">ENTER DESCRIPTION</string>
+    <string name="place_marker">Place marker</string>
+    <string name="place_marker_please">Place marker on map</string>
     <string name="onCloseText">Exit Confirm</string>
     <string name="onCloseMessage">Are you sure?</string>
 
