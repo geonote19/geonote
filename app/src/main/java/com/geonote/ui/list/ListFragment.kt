@@ -1,5 +1,6 @@
 package com.geonote.ui.list
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -8,9 +9,11 @@ import com.geonote.R
 import com.geonote.data.model.Status
 import com.geonote.data.model.db.Note
 import com.geonote.databinding.FragmentListBinding
+import com.geonote.helper.VerticalSpaceItemDecoration
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
 import com.geonote.utils.addDays
+import com.geonote.utils.toPixels
 import kotlinx.android.synthetic.main.fragment_list.*
 import java.util.*
 
@@ -32,6 +35,7 @@ class ListFragment : BaseFragment<FragmentListBinding, ListFragmentViewModel, Ma
         super.onViewCreated(view, savedInstanceState)
         mAdapter = ListFragmentAdapter(context!!, mOnNoteClickListener)
         recyclerView.adapter = mAdapter
+        recyclerView.addItemDecoration(VerticalSpaceItemDecoration(2.toPixels()))
         buttonSeeOnMap.setOnClickListener {
             toMapActivity()
         }
@@ -45,7 +49,8 @@ class ListFragment : BaseFragment<FragmentListBinding, ListFragmentViewModel, Ma
                 27.557117,
                 100,
                 Date().addDays(-1).time,
-                Date().addDays(2).time
+                Date().addDays(2).time,
+                Color.RED
             )
             mActivity.toEditDetailFragment(newNote)
         }

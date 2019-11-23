@@ -12,5 +12,16 @@
     <string name="see_on_map">Show on the card</string>
     <string name="settings_title">Settings</string>
     <string name="all_notes">All notes</string>
+    <string name="title_new_note">Title</string>
+    <string name="details_new_note">Description</string>
     <string name="you_are_near">You are near!</string>
+    <string name="search_hint">SEARCH</string>
+
+    <string-array name="choose_colors">
+        <item>#FF00FF</item>
+        <item>#00FF00</item>
+        <item>#0000FF</item>
+        <item>#FF0000</item>
+        <item>#FFFF00</item>
+    </string-array>
 </resources>

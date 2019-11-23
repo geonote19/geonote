@@ -42,7 +42,13 @@ class ListFragmentAdapter(
 
         fun bind(note: Note) {
             mDataBinding.note = note
-            mDataBinding.callback = mCallback
+            mDataBinding.coloredTextView.apply {
+                setText(note.title)
+                setColor(note.color)
+                setOnClickListener {
+                    mCallback.onItemClick(note)
+                }
+            }
             mDataBinding.executePendingBindings()
         }
     }

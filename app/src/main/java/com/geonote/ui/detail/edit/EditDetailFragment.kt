@@ -1,6 +1,5 @@
 package com.geonote.ui.detail.edit
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -13,8 +12,8 @@ import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
 import com.geonote.utils.addDays
 import kotlinx.android.synthetic.main.fragment_details_edit.*
-import java.text.DateFormat
 import java.util.*
+import android.graphics.Color
 
 
 class EditDetailFragment :
@@ -32,7 +31,8 @@ class EditDetailFragment :
         27.557117,
         100,
         Date().addDays(-1).time,
-        Date().addDays(2).time
+        Date().addDays(2).time,
+        Color.RED
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
