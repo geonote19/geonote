@@ -16,6 +16,8 @@
     <string name="details_new_note">Description</string>
     <string name="you_are_near">You are near!</string>
     <string name="search_hint">SEARCH</string>
+    <string name="onCloseText">Exit Confirm</string>
+    <string name="onCloseMessage">Are you sure?</string>
 
     <string-array name="choose_colors">
         <item>#FF00FF</item>

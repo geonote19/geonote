@@ -11,4 +11,6 @@
     <string name="search_hint">ПОИСК</string>
     <string name="title_new_note">Название</string>
     <string name="details_new_note">Описание</string>
+    <string name="onCloseText">Подтверждение выхода</string>
+    <string name="onCloseMessage">Вы уверены?</string>
 </resources>
