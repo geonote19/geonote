@@ -3,6 +3,7 @@ package com.geonote.ui.detail.mapDetails
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.Navigation
 import com.geonote.BR
 import com.geonote.R
 import com.geonote.databinding.FragmentDetailsMapBinding
@@ -41,6 +42,7 @@ class DetailsFragmentMap :
                 override fun consume(bitmap: Bitmap) {
                     mActivity.mapBitmap = bitmap
                     mActivity.latlng = mCoordinates[0]
+                    Navigation.findNavController(view).navigateUp()
                 }
             })
         }
