@@ -29,7 +29,7 @@ class DetailFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         editNoteButton.setOnClickListener {
-            toEditDetailFragment(mNoteId)
+            toEditDetailFragment(mViewModel.note.get() ?: throw RuntimeException())
         }
 
         val dateFormat = DateFormat.getInstance()
@@ -42,8 +42,8 @@ class DetailFragment :
 
     }
 
-    private fun toEditDetailFragment(noteId: Long) {
-        mActivity.toEditDetailFragment(noteId)
+    private fun toEditDetailFragment(note: Note) {
+        mActivity.toEditDetailFragment(note)
     }
 
     override fun setupViewModel(viewModel: DetailFragmentViewModel) {

@@ -18,6 +18,10 @@ class ListFragmentViewModel(
     val noteDataList: LiveData<Event<List<Note>>> = noteDataListMutable
 
     init {
+        load()
+    }
+
+    fun load() {
         requestWithLiveData(noteDataListMutable) {
             mAppRepository.getNoteList()
         }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.geonote.data.AppRepository
 import com.geonote.ui.MainActivityViewModel
 import com.geonote.ui.detail.DetailFragmentViewModel
-import com.geonote.ui.detail.EditDetailFragmentViewModel
+import com.geonote.ui.detail.edit.EditDetailFragmentViewModel
 import com.geonote.ui.detail.mapDetails.DetailFragmentMapViewModel
 import com.geonote.ui.list.ListFragmentViewModel
 import com.geonote.ui.mapAllNotes.MapActivityViewModel
