@@ -44,6 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     private lateinit var mBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         setupNavigationBar()
         super.onCreate(savedInstanceState)
         buttonMap.setOnClickListener {
