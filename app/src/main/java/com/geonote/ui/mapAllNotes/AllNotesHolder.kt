@@ -11,6 +11,9 @@ class AllNotesHolder(view: View) : RecyclerView.ViewHolder(view), LayoutContaine
         get() = itemView
 
     fun bind(note: Note) {
-        itemAlliNotesText.text = note.title
+        coloredTextView.apply {
+            setText(note.title)
+            setColor(note.color)
+        }
     }
 }

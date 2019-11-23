@@ -77,9 +77,19 @@ class AllNotesFragmentBehavior :
             it.getMapAsync(this)
         }
 
+        val imageArrow = view.findViewById<View>(R.id.imageArrow)
         bottomSheet.applyDefaultOutlineProvider(CustomViewOutlineProvider.RoundedArea.TOP)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(p0: View, offset: Float) {
+                imageArrow.rotation = 180 * offset
+            }
+
+            override fun onStateChanged(p0: View, p1: Int) {
+            }
+
+        })
         textForBehavior.setOnClickListener {
             bottomSheetBehavior.state =
                 if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) BottomSheetBehavior.STATE_EXPANDED

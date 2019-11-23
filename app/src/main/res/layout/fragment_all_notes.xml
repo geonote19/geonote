@@ -13,9 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/note_item_bg"
-        android:orientation="vertical"
-        android:padding="8dp">
-        <include layout="@layout/toolbar" />
+        android:orientation="vertical">
 
         <com.geonote.map.CustomMapView
             android:id="@+id/mapView"

@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="edit_search_text_cursor">#313131</color>
     <color name="text_buy_activity">#a5a5a5</color>
+    <color name="bottomsheet_background">@android:color/white</color>
 </resources>
