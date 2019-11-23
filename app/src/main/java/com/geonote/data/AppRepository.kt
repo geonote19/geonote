@@ -23,10 +23,13 @@ class AppRepository private constructor(
                     this.latitude = marker.latitude
                     this.latitude = marker.latitude
                     this.longitude = marker.longitude
-                    this.lifetimeMs = marker.lifetimeMs
+                    this.dateTo = marker.dateTo
+                    this.dateFrom = marker.dateFrom
+                    this.title = marker.title
                     this.radiusM = marker.radiusM
                 }
             insertNote(note)
+            mGeoManager.addOrUpdateMarker(marker)
             it.resume(Unit)
         }
     }
@@ -57,6 +60,12 @@ class AppRepository private constructor(
     suspend fun removeNote(noteIds: List<Long>): Unit =
         suspendCoroutine {
             mDataBase.noteDao().removeNoteByIds(noteIds.map { it.toString() })
+            it.resume(Unit)
+        }
+
+    suspend fun mergeNote(note: Note): Unit =
+        suspendCoroutine {
+            mDataBase.noteDao().insertNote(note)
             it.resume(Unit)
         }
 

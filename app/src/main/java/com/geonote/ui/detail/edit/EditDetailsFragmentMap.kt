@@ -1,4 +1,4 @@
-package com.geonote.ui.detail
+package com.geonote.ui.detail.edit
 
 import android.os.Bundle
 import com.geonote.databinding.FragmentDetailBinding

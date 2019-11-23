@@ -12,6 +12,7 @@
     <string name="see_on_map">Show on the card</string>
     <string name="settings_title">Settings</string>
     <string name="all_notes">All notes</string>
-    <string name="title_new_note">Название</string>
-    <string name="details_new_note">Описание</string>
+    <string name="title_new_note">Title</string>
+    <string name="details_new_note">Description</string>
+    <string name="you_are_near">You are near!</string>
 </resources>

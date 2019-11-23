@@ -1,30 +1,26 @@
-package com.geonote.ui.detail
+package com.geonote.ui.detail.edit
 
 import android.app.Application
-import android.widget.Toast
-import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.geonote.data.AppRepository
-import com.geonote.data.model.Event
 import com.geonote.data.model.db.Note
 import com.geonote.ui.base.BaseViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class EditDetailFragmentViewModel(
     application: Application,
     appRepository: AppRepository
 ) : BaseViewModel(application, appRepository) {
 
-    private val noteDataMutable = MutableLiveData<Event<Note>>()
-    val note = ObservableField<Note>()
+    val note = MutableLiveData<Note>()
 
-    fun loadNote(id: Long) {
-        requestWithLiveData(noteDataMutable, note) {
-            mAppRepository.getNoteById(id)
+    fun save(noteToSave: Note) {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            mAppRepository.mergeNote(noteToSave)
         }
-    }
 
-    fun save() {
-        //Toast.makeText(getApplication(), "Сохранено", Toast.LENGTH_SHORT).show()
     }
 }

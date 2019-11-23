@@ -7,4 +7,7 @@
     <string name="see_on_map">Показать на карте</string>
     <string name="settings_title">Настройки</string>
     <string name="all_notes">Все заметки</string>
+    <string name="you_are_near">Вы рядом!</string>
+    <string name="title_new_note">Название</string>
+    <string name="details_new_note">Описание</string>
 </resources>
