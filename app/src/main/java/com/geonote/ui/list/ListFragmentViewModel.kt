@@ -1,6 +1,7 @@
 package com.geonote.ui.list
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.geonote.data.AppRepository
@@ -15,7 +16,7 @@ class ListFragmentViewModel(
 
     private val noteDataListMutable = MutableLiveData<Event<List<Note>>>()
 
-    val noteDataList: LiveData<Event<List<Note>>> = noteDataListMutable
+    var noteDataList: LiveData<Event<List<Note>>> = noteDataListMutable
 
     init {
         load()
@@ -25,5 +26,15 @@ class ListFragmentViewModel(
         requestWithLiveData(noteDataListMutable) {
             mAppRepository.getNoteList()
         }
+    }
+    fun  searchList(search: String){
+        Log.e("QQQ",search)
+
+       /* noteDataList = noteDataList.filter {
+            it.header.contains(
+                search,
+                true
+            )
+        }.toMutableList()*/
     }
 }
