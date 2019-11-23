@@ -39,9 +39,6 @@ class ChooseColorView : LinearLayout {
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
-        clipToPadding = false
-        clipChildren = false
-        setBackgroundColor(Color.TRANSPARENT)
         orientation = HORIZONTAL
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.ChooseColorView)
@@ -65,14 +62,11 @@ class ChooseColorView : LinearLayout {
     private fun createViewWithShadow(color: Int): View {
         val parent = FrameLayout(context)
             .apply {
-                clipChildren = false
-                clipToPadding = false
                 layoutParams = LayoutParams(0, mRadius * 2)
                     .apply { weight = 1F }
             }
         val imageView = ImageView(context)
             .apply {
-                isClickable = true
                 setImageResource(R.drawable.choose_color_view_circle)
                 scaleType = ImageView.ScaleType.CENTER_INSIDE
                 colorFilter = ViewUtils.getColorFilter(color)

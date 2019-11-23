@@ -15,6 +15,18 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
+        <com.geonote.views.ChooseColorView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            app:color_array="@array/choose_colors"
+            app:radius="50dp"
+            android:layout_height="wrap_content" />
+
+        <com.geonote.views.ColoredTextView
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="match_parent"
