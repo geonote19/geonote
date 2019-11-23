@@ -23,7 +23,9 @@ class AppRepository private constructor(
                     this.latitude = marker.latitude
                     this.latitude = marker.latitude
                     this.longitude = marker.longitude
-                    this.lifetimeMs = marker.lifetimeMs
+                    this.dateTo = marker.dateTo
+                    this.dateFrom = marker.dateFrom
+                    this.title = marker.title
                     this.radiusM = marker.radiusM
                 }
             insertNote(note)

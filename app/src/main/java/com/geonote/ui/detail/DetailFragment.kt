@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.View
 import com.geonote.BR
 import com.geonote.R
+import com.geonote.data.model.Event
+import com.geonote.data.model.db.Note
 import com.geonote.databinding.FragmentDetailBinding
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_detail.*
+import java.text.DateFormat
 
 class DetailFragment :
     BaseFragment<FragmentDetailBinding, DetailFragmentViewModel, MainActivity>() {
@@ -28,6 +31,15 @@ class DetailFragment :
         editNoteButton.setOnClickListener {
             toEditDetailFragment(mNoteId)
         }
+
+        val dateFormat = DateFormat.getInstance()
+        mViewModel.noteDataMutable.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer<Event<Note>> {
+                dateTo.text = dateFormat.format(it.data?.dateTo)
+                dateFrom.text = dateFormat.format(it.data?.dateFrom)
+            })
+
     }
 
     private fun toEditDetailFragment(noteId: Long) {

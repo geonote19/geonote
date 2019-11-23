@@ -10,6 +10,7 @@ import com.google.android.gms.location.GeofencingEvent
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 import timber.log.Timber
+import java.util.*
 
 class GeofenceManager private constructor(context: Context) : AbstractGeoManager() {
 
@@ -21,27 +22,31 @@ class GeofenceManager private constructor(context: Context) : AbstractGeoManager
     }
 
     override fun addOrUpdateMarker(marker: Marker) {
-        val geofence = Geofence.Builder()
-            .setRequestId(marker.id.toString())
-            .setCircularRegion(marker.latitude, marker.longitude, marker.radiusM.toFloat())
-            .setExpirationDuration(marker.lifetimeMs)
-            .setTransitionTypes(
-                Geofence.GEOFENCE_TRANSITION_ENTER
-                        or Geofence.GEOFENCE_TRANSITION_EXIT
-            )
-            .build()
+        val currentTime = Date().time
+        if (currentTime in marker.dateFrom until marker.dateFrom) {
 
-        val geofencingRequest = GeofencingRequest.Builder()
-            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
-            .addGeofence(geofence)
-            .build()
+            val geofence = Geofence.Builder()
+                .setRequestId(marker.id.toString())
+                .setCircularRegion(marker.latitude, marker.longitude, marker.radiusM.toFloat())
+                .setExpirationDuration(marker.dateTo - currentTime)
+                .setTransitionTypes(
+                    Geofence.GEOFENCE_TRANSITION_ENTER
+                            or Geofence.GEOFENCE_TRANSITION_EXIT
+                )
+                .build()
 
-        mGeofencingClient.addGeofences(geofencingRequest, geofencePendingIntent).run {
-            addOnSuccessListener {
-                Timber.d("Marker was successfully added")
-            }
-            addOnFailureListener {
-                Timber.e(it, "Error during adding a marker")
+            val geofencingRequest = GeofencingRequest.Builder()
+                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+                .addGeofence(geofence)
+                .build()
+
+            mGeofencingClient.addGeofences(geofencingRequest, geofencePendingIntent).run {
+                addOnSuccessListener {
+                    Timber.d("Marker was successfully added")
+                }
+                addOnFailureListener {
+                    Timber.e(it, "Error during adding a marker")
+                }
             }
         }
     }

@@ -31,7 +31,6 @@ class MapHelper(
             if (SystemUtils.hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
                 isMyLocationEnabled = true
             }
-            setPadding(0, MAP_PADDING_TOP, 0, 0)
             setOnInfoWindowClickListener {
                 (it.tag as? com.geonote.data.model.Marker)?.let {
                     mCallback?.onMarkerClicked(it)
@@ -81,7 +80,6 @@ class MapHelper(
         )
 
     companion object {
-        private val MAP_PADDING_TOP = 40.toPixels()
         private const val MAP_MIN_ZOOM = 10F
 
         private const val DEFAULT_LONGITUDE = 53.904183
