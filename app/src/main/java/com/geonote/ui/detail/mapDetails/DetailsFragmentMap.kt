@@ -1,5 +1,6 @@
 package com.geonote.ui.detail.mapDetails
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import com.geonote.BR
@@ -13,7 +14,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.fragment_details_map.*
 
-class DetailsFragmentMap : BaseFragment<FragmentDetailsMapBinding, DetailFragmentMapViewModel, MainActivity>(),
+class DetailsFragmentMap :
+    BaseFragment<FragmentDetailsMapBinding, DetailFragmentMapViewModel, MainActivity>(),
     OnMapReadyCallback {
 
     override val mViewModelClass = DetailFragmentMapViewModel::class.java
@@ -21,6 +23,7 @@ class DetailsFragmentMap : BaseFragment<FragmentDetailsMapBinding, DetailFragmen
     override val mBindingVariable = BR.viewmodel
 
     private var mMapHelper: MapHelper? = null
+    private val mCoordinates: MutableList<LatLng> = mutableListOf()
 
     val ZOOM_LEVEL = 10.0F
 
@@ -32,6 +35,16 @@ class DetailsFragmentMap : BaseFragment<FragmentDetailsMapBinding, DetailFragmen
             it.onCreate(savedInstanceState)
             it.getMapAsync(this)
         }
+
+        btnSave.setOnClickListener {
+            mMapHelper?.takeSnapshot(object : BitmapConsumer {
+                override fun consume(bitmap: Bitmap) {
+                    mActivity.mapBitmap = bitmap
+                    mActivity.latlng = mCoordinates[0]
+                }
+            })
+        }
+
     }
 
     override fun onLowMemory() {
@@ -47,5 +60,10 @@ class DetailsFragmentMap : BaseFragment<FragmentDetailsMapBinding, DetailFragmen
     override fun onMapReady(googleMap: GoogleMap?) {
         googleMap ?: return
         mMapHelper = MapHelper(googleMap, context!!)
+        mMapHelper!!.chooseCoordinates(mCoordinates)
     }
+}
+
+interface BitmapConsumer {
+    fun consume(bitmap: Bitmap)
 }

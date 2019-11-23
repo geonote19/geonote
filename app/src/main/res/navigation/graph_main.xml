@@ -13,6 +13,11 @@
         android:id="@+id/action_to_edit_detailfragment"
         app:destination="@id/editDetailFragment" />
 
+    <action
+        android:id="@+id/mapPreview"
+        app:destination="@+id/mapDetailsPin"
+        />
+
     <fragment
         android:id="@+id/listFragment"
         android:name="com.geonote.ui.list.ListFragment"

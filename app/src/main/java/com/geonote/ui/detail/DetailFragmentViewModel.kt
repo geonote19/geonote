@@ -1,9 +1,7 @@
 package com.geonote.ui.detail
 
 import android.app.Application
-import android.widget.Toast
 import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.geonote.data.AppRepository
 import com.geonote.data.model.Event
@@ -22,10 +20,5 @@ class DetailFragmentViewModel(
         requestWithLiveData(noteDataMutable, note) {
             mAppRepository.getNoteById(id)
         }
-    }
-
-
-    fun save() {
-        //Toast.makeText(getApplication(), "Сохранено", Toast.LENGTH_SHORT).show()
     }
 }

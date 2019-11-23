@@ -5,8 +5,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.geonote.R
 import com.geonote.map.CustomMarkerInfoWindowView
+import com.geonote.ui.detail.mapDetails.BitmapConsumer
 import com.geonote.utils.SystemUtils
-import com.geonote.utils.toPixels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
@@ -40,6 +40,14 @@ class MapHelper(
         addOnMarkerDragListener()
     }
 
+    fun takeSnapshot(consumer:BitmapConsumer ){
+
+        mMap.snapshot {
+            consumer.consume(it)
+        }
+
+    }
+
     private fun addOnMarkerDragListener() {
         mMap.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
             override fun onMarkerDragStart(marker: Marker) {}
@@ -68,6 +76,15 @@ class MapHelper(
             CameraUpdateFactory.newLatLngZoom(position, MAP_MIN_ZOOM)
         } else CameraUpdateFactory.newLatLng(position)
         mMap.animateCamera(cameraUpdate)
+    }
+
+    fun chooseCoordinates(markers:MutableList<LatLng>){
+        mMap.setOnMapClickListener {
+            markers.clear()
+            markers.add(it)
+            mMap.clear()
+            mMap.addMarker(MarkerOptions().position(it))
+        }
     }
 
     private fun addMarker(markerData: com.geonote.data.model.Marker) =
