@@ -1,13 +1,11 @@
 package com.geonote.ui.base
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -52,7 +50,15 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel, A : BaseActi
         requireActivity().onBackPressedDispatcher.addCallback(this@BaseFragment, object :
             OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                requireActivity().finish()
+
+                if (fragmentManager?.backStackEntryCount == 0) {
+                    requireActivity().finish()
+                } else {
+                    Navigation.findNavController(view!!).navigateUp()
+                    //onBackPressed()
+                }
+
+
             }
         })
 

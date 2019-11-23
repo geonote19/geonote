@@ -8,6 +8,13 @@ class CustomNavHostFragment : NavHostFragment() {
         super.onCreateNavController(navController)
         context?.let {
             navController.navigatorProvider.addNavigator(StacklessFragmentNavigator(it, childFragmentManager, id))
+            navController.navigatorProvider.addNavigator(
+                StatefulFragmentNav(
+                    it,
+                    childFragmentManager,
+                    id
+                )
+            )
         }
     }
 }

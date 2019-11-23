@@ -24,7 +24,7 @@
         android:label="listFragment"
         tools:layout="@layout/fragment_list"/>
 
-    <stackless_fragment
+    <stateful_fragment
         android:id="@+id/detailFragment"
         android:name="com.geonote.ui.detail.DetailFragment"
         android:label="detailFragment"
@@ -32,9 +32,9 @@
         <argument
             android:name="noteId"
             app:argType="long" />
-    </stackless_fragment>
+    </stateful_fragment>
 
-    <stackless_fragment
+    <stateful_fragment
         android:id="@+id/editDetailFragment"
         android:name="com.geonote.ui.detail.edit.EditDetailFragment"
         android:label="editDetailFragment"
@@ -42,7 +42,7 @@
         <argument
             android:name="note"
             app:argType="com.geonote.data.model.db.Note" />
-    </stackless_fragment>
+    </stateful_fragment>
 
     <stackless_fragment
         android:id="@+id/mapDetailsPin"
