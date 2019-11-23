@@ -28,15 +28,31 @@
             android:id="@+id/imageArrow"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="4dp"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerInside"
             android:src="@drawable/ic_bottomsheet_arrow" />
     </FrameLayout>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:textColor="@android:color/black"
+        android:hint="@string/search_hint"
+        android:textColorHint="#d8d8d8"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:textCursorDrawable="@color/edit_search_text_cursor"
+        android:singleLine="true"
+        android:paddingBottom="15dp"
+        android:textAllCaps="true"
+        android:background="@drawable/search_background_light"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allNotesMapRecycler"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
