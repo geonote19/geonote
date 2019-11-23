@@ -39,6 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     var latlng: LatLng? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         setupNavigationBar()
         super.onCreate(savedInstanceState)
         buttonMap.setOnClickListener {
