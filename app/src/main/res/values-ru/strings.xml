@@ -11,4 +11,8 @@
     <string name="search_hint">ПОИСК</string>
     <string name="title_new_note">Название</string>
     <string name="details_new_note">Описание</string>
+    <string name="title_hint">ВВЕДИТЕ НАЗВАНИЕ</string>
+    <string name="description_hint">ВВЕДИТЕ ОПИСАНИЕ</string>
+    <string name="place_marker">Поставить метку</string>
+    <string name="place_marker_please">Разместите метку на карте</string>
 </resources>

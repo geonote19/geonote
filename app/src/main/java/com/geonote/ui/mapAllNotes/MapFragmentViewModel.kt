@@ -34,6 +34,12 @@ class MapFragmentViewModel(
         }
     }
 
+    fun addNote(note: Note) {
+        viewModelScope.launch(Dispatchers.IO) {
+            mAppRepository.mergeNote(note)
+        }
+    }
+
     init {
         requestWithLiveData(noteDataMutable) {
             mAppRepository.getNoteList()

@@ -10,36 +10,50 @@
             type="com.geonote.ui.MainActivityViewModel" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#262626"
-        android:orientation="vertical"
-        tools:context=".ui.MainActivity">
+        android:layout_height="match_parent">
 
-        <FrameLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/note_item_bg"
+            android:orientation="vertical">
 
-            <fragment
-                android:id="@+id/navHostFragment"
-                android:name="com.geonote.core.CustomNavHostFragment"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/graph_main" />
+                android:background="#262626"
+                android:orientation="vertical"
+                tools:context=".ui.MainActivity">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/list_shadow_jfrost" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-        </FrameLayout>
+                    <fragment
+                        android:id="@+id/navHostFragment"
+                        android:name="com.geonote.core.CustomNavHostFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:defaultNavHost="true"
+                        app:navGraph="@navigation/graph_main" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <include layout="@layout/bottomsheet_main" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_gravity="bottom"
             android:background="@android:color/white"
             android:paddingTop="5dp"
             android:paddingBottom="5dp">
@@ -74,7 +88,13 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/list_shadow_jfrost" />
 
-    </LinearLayout>
+    </FrameLayout>
 
 </layout>

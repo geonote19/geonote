@@ -19,6 +19,9 @@ class MapHelper(
 
     init {
         with(mMap) {
+            setOnMapClickListener {
+                mCallback?.onMapClicked(it.latitude, it.longitude)
+            }
             setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style))
             moveCamera(
                 CameraUpdateFactory.newLatLngZoom(
@@ -91,7 +94,7 @@ class MapHelper(
         }
     }
 
-    private fun addMarker(markerData: com.geonote.data.model.Marker) =
+    fun addMarker(markerData: com.geonote.data.model.Marker) =
         mMap.addMarker(
             MarkerOptions()
                 .position(LatLng(markerData.latitude, markerData.longitude))
@@ -109,6 +112,7 @@ class MapHelper(
         interface Callback {
             fun onMarkerPositionChanged(markerData: com.geonote.data.model.Marker)
             fun onMarkerClicked(markerData: com.geonote.data.model.Marker)
+            fun onMapClicked(latitude: Double, longitude: Double)
         }
     }
 }

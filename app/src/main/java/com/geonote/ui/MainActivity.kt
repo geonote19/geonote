@@ -6,6 +6,8 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.geonote.BR
 import com.geonote.GraphMainDirections
@@ -15,12 +17,14 @@ import com.geonote.databinding.ActivityMainBinding
 import com.geonote.ui.base.BaseActivity
 import com.geonote.ui.list.ListFragment
 import com.geonote.ui.mapAllNotes.AllNotesFragmentBehavior
+import com.geonote.utils.CustomViewOutlineProvider
 import com.geonote.utils.RequestPermissions
-import com.geonote.utils.addDays
+import com.geonote.utils.applyDefaultOutlineProvider
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.bottomsheet_main.*
 import timber.log.Timber
-import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
 
@@ -36,35 +40,50 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     override val mNavHostId = R.id.navHostFragment
     var mapBitmap: Bitmap? = null
     var latlng: LatLng? = null
+    private lateinit var mBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setupNavigationBar()
         super.onCreate(savedInstanceState)
         buttonMap.setOnClickListener {
-            if(currentFragment !is AllNotesFragmentBehavior){
+            if (currentFragment !is AllNotesFragmentBehavior) {
                 toMapActivity()
             }
 
         }
         buttonMenu.setOnClickListener {
-            if(currentFragment !is ListFragment) {
+            if (currentFragment !is ListFragment) {
                 toListFragment()
             }
         }
-        buttonAdd.setOnClickListener {
-            var newNote = Note(
-                0,
-                "",
-                "",
-                "",
-                53.899604,
-                27.557117,
-                100,
-                Date().addDays(-1).time,
-                Date().addDays(2).time,
-                Color.RED
+//        buttonAdd.setOnClickListener {
+
+//            var newNote = Note(
+//                0,
+//                "",
+//                "",
+//                "",
+//                53.899604,
+//                27.557117,
+//                100,
+//                Date().addDays(-1).time,
+//                Date().addDays(2).time,
+//                Color.RED
+//            )
+//            toEditDetailFragment(newNote)
+//        }
+        setupBottomSheetBehavior()
+        buttonPlaceMarker.setOnClickListener {
+            Toast.makeText(this, R.string.place_marker_please, Toast.LENGTH_LONG).show()
+            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            val note = Note(
+                0, textTitle.text.toString(), textDescription.text.toString(),
+                "", 0.0, 0.0, 100, 0,
+                System.currentTimeMillis() + 1_000_000, Color.RED
             )
-            toEditDetailFragment(newNote)
+            if (currentFragment is AllNotesFragmentBehavior) {
+                (currentFragment as AllNotesFragmentBehavior).setNoteForSaving(note)
+            } else toMapFragment(note)
         }
     }
 
@@ -76,6 +95,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
             window.navigationBarColor = Color.WHITE
         }
         super.onStart()
+    }
+
+    private fun setupBottomSheetBehavior() {
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheetMain)
+        bottomSheetMain.applyDefaultOutlineProvider(CustomViewOutlineProvider.RoundedArea.TOP)
+        mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        buttonAdd.setOnClickListener {
+            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
     }
 
 
@@ -93,8 +121,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     }
 
 
-    fun toMapDetailFragment(noteId: Long) {
-        val action = GraphMainDirections.mapPreview(noteId)
+    fun toMapFragment(note: Note) {
+        val action = GraphMainDirections.actionToMapFragment(note)
         mNavController?.navigate(action)
     }
 

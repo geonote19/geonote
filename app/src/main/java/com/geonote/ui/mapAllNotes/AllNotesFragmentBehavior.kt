@@ -36,14 +36,27 @@ class AllNotesFragmentBehavior :
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private lateinit var mAdapter: AllNotesAdapter
     private var mMapHelper: MapHelper? = null
+    private var mNoteForSaving: Note? = null
 
     private val mCallback = object : MapHelper.Companion.Callback {
+
+        override fun onMapClicked(latitude: Double, longitude: Double) {
+            if (mNoteForSaving != null) {
+                mNoteForSaving!!.latitude = latitude
+                mNoteForSaving!!.longitude = longitude
+                mViewModel.addNote(mNoteForSaving!!)
+                mMapHelper?.addMarker(mNoteForSaving!!.toMarker())
+                mNoteForSaving = null
+            }
+        }
 
         override fun onMarkerClicked(markerData: Marker) {
             mViewModel.getNoteById(markerData.id) {
                 App.handler.post {
-                    InfoDialog.newInstance(it).show(mActivity.supportFragmentManager,
-                        InfoDialog::class.java.simpleName)
+                    InfoDialog.newInstance(it).show(
+                        mActivity.supportFragmentManager,
+                        InfoDialog::class.java.simpleName
+                    )
                 }
             }
         }
@@ -52,6 +65,10 @@ class AllNotesFragmentBehavior :
             mViewModel.updateMarkerLocation(markerData)
         }
 
+    }
+
+    fun setNoteForSaving(noteForSaving: Note) {
+        mNoteForSaving = noteForSaving
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -64,6 +81,15 @@ class AllNotesFragmentBehavior :
                 }
             }
         })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null && arguments?.containsKey("note") == true) {
+            val args = AllNotesFragmentBehaviorArgs.fromBundle(arguments!!)
+            mNoteForSaving = args.note
+
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -119,5 +145,9 @@ class AllNotesFragmentBehavior :
     override fun onClickNote(note: Note) {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         mMapHelper?.setCameraPosition(note.latitude, note.longitude)
+    }
+
+    companion object {
+        const val PARAM_NOTE_FOR_SAVING = "note_for_saving"
     }
 }

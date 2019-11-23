@@ -100,6 +100,6 @@ class EditDetailFragment :
     }
 
     fun toMapDetailFragment() {
-        mActivity.toMapDetailFragment(mNote.id)
+
     }
 }
