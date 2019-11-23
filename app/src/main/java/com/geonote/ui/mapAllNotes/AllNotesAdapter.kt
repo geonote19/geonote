@@ -14,7 +14,7 @@ class AllNotesAdapter(private var notes: MutableList<Note>, private val listener
             LayoutInflater.from(parent.context).inflate(R.layout.item_one_note, parent, false)
 
         val holder = AllNotesHolder(view)
-        holder.itemView.setOnClickListener {
+        holder.coloredTextView.setOnClickListener {
             listener.onClickNote(notes[holder.adapterPosition])
         }
         return holder

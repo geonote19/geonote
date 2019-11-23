@@ -11,6 +11,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onCancel
+import com.geonote.R
 import com.geonote.ViewModelFactory
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel, A : BaseActivity<*, *>> :
@@ -52,7 +55,14 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel, A : BaseActi
             override fun handleOnBackPressed() {
 
                 if (fragmentManager?.backStackEntryCount == 0) {
-                    requireActivity().finish()
+                    val dialog = MaterialDialog(context!!).title(R.string.onCloseText)
+                        .message(R.string.onCloseMessage)
+                    dialog.show {
+                        positiveButton { requireActivity().finish() }
+                        negativeButton { dialog.onCancel { onBackPressed()} }
+                        cornerRadius(10F)
+                    }
+
                 } else {
                     Navigation.findNavController(view!!).navigateUp()
                     //onBackPressed()

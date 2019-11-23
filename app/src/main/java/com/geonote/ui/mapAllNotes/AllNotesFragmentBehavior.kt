@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
-import com.geonote.BR
-import com.geonote.R
+import com.geonote.*
+import com.geonote.data.AppRepository
 import com.geonote.data.model.Marker
 import com.geonote.data.model.Status
 import com.geonote.data.model.db.Note
@@ -40,7 +40,12 @@ class AllNotesFragmentBehavior :
     private val mCallback = object : MapHelper.Companion.Callback {
 
         override fun onMarkerClicked(markerData: Marker) {
-            mActivity.toDetailFragment(markerData.id)
+            mViewModel.getNoteById(markerData.id) {
+                App.handler.post {
+                    InfoDialog.newInstance(it).show(mActivity.supportFragmentManager,
+                        InfoDialog::class.java.simpleName)
+                }
+            }
         }
 
         override fun onMarkerPositionChanged(markerData: com.geonote.data.model.Marker) {
@@ -81,7 +86,8 @@ class AllNotesFragmentBehavior :
         bottomSheet.applyDefaultOutlineProvider(CustomViewOutlineProvider.RoundedArea.TOP)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.setBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(p0: View, offset: Float) {
                 imageArrow.rotation = 180 * offset
             }

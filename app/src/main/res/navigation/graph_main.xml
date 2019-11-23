@@ -44,7 +44,7 @@
             app:argType="com.geonote.data.model.db.Note" />
     </stateful_fragment>
 
-    <stackless_fragment
+    <stateful_fragment
         android:id="@+id/mapDetailsPin"
         android:name="com.geonote.ui.detail.mapDetails.DetailsFragmentMap"
         android:label="mapDetailsPin"
@@ -53,7 +53,7 @@
             android:name="noteMap"
             app:argType="long" />
 
-    </stackless_fragment>
+    </stateful_fragment>
 
     <stackless_fragment
         android:id="@+id/mapFragment"
