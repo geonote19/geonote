@@ -94,7 +94,7 @@ class MapHelper(
         }
     }
 
-    fun addMarker(markerData: com.geonote.data.model.Marker) =
+    private fun addMarker(markerData: com.geonote.data.model.Marker) =
         mMap.addMarker(
             MarkerOptions()
                 .position(LatLng(markerData.latitude, markerData.longitude))
