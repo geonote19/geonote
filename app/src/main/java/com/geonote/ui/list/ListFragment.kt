@@ -11,7 +11,9 @@ import com.geonote.databinding.FragmentListBinding
 import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
 import com.geonote.ui.notification.Notification
+import com.geonote.utils.addDays
 import kotlinx.android.synthetic.main.fragment_list.*
+import java.util.*
 
 class ListFragment : BaseFragment<FragmentListBinding, ListFragmentViewModel, MainActivity>() {
 
@@ -36,6 +38,20 @@ class ListFragment : BaseFragment<FragmentListBinding, ListFragmentViewModel, Ma
         recyclerView.adapter = mAdapter
         buttonSeeOnMap.setOnClickListener {
             toMapActivity()
+        }
+        buttonAddNew.setOnClickListener {
+            var newNote = Note(
+                0,
+                "",
+                "",
+                "",
+                53.899604,
+                27.557117,
+                100,
+                Date().addDays(-1).time,
+                Date().addDays(2).time
+            )
+            mActivity.toEditDetailFragment(newNote)
         }
     }
 
