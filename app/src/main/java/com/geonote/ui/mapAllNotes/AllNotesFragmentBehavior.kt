@@ -23,6 +23,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.bottomsheet.*
 import kotlinx.android.synthetic.main.fragment_all_notes.*
+import kotlinx.android.synthetic.main.bottomsheet.allNotesMapRecycler
 
 class AllNotesFragmentBehavior :
     BaseFragment<FragmentAllNotesBinding, MapFragmentViewModel, MainActivity>(),
@@ -55,6 +56,10 @@ class AllNotesFragmentBehavior :
         allNotesMapRecycler.setHasFixedSize(true)
         mAdapter = AllNotesAdapter(mutableListOf(), this)
         allNotesMapRecycler.adapter = mAdapter
+
+        allNotesMapRecycler.addItemDecoration(
+            VerticalSpaceItemDecoration(2.toPixels())
+        )
 
         mapView.let {
             lifecycle.addObserver(it)

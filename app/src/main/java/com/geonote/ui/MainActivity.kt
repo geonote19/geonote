@@ -1,6 +1,8 @@
 package com.geonote.ui
 
 import android.Manifest
+import android.content.res.Resources
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
@@ -13,14 +15,16 @@ import com.geonote.ui.detail.DetailFragmentDirections
 import com.geonote.ui.detail.EditDetailFragmentDirections
 import com.geonote.ui.list.ListFragmentDirections
 import com.geonote.utils.RequestPermissions
+import kotlinx.android.synthetic.main.toolbar.*
 import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
 
     private val LIST_PERMISSONS = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.READ_CALENDAR,
+        Manifest.permission.WRITE_CALENDAR
     )
-
 
     private val requestPermission = RequestPermissions(this, LIST_PERMISSONS)
 
@@ -32,6 +36,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     override fun onStart() {
         if (requestPermission.ifHasPermissions()) Timber.e("Permissions")
+        setSupportActionBar(toolbar)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = resources.getColor(R.color.colorToolbar)
+        }
         super.onStart()
     }
 
@@ -60,7 +69,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         mNavController!!.navigate(action)
     }
 
-
     fun toDetailFragment(noteId: Long) {
         val action = ListFragmentDirections.actionToDetailfragment(noteId)
         mNavController!!.navigate(action)
@@ -68,5 +76,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
     fun toMapActivity() {
         mNavController!!.navigate(R.id.mapFragment)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }
