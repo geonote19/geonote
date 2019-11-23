@@ -2,6 +2,8 @@ package com.geonote.ui.list
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.Observer
 import com.geonote.BR
@@ -54,13 +56,38 @@ class ListFragment : BaseFragment<FragmentListBinding, ListFragmentViewModel, Ma
             )
             mActivity.toEditDetailFragment(newNote)
         }
+
+        searchListFragmentEditText.addTextChangedListener(
+
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    mAdapter.searchList(s.toString())
+
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                }
+            })
     }
 
     private fun toDetailFragment(noteId: Long) {
         mActivity.toDetailFragment(noteId)
     }
 
-    private fun toMapActivity(){
+    private fun toMapActivity() {
         mActivity.toMapActivity()
     }
 
