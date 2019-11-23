@@ -1,14 +1,15 @@
 <resources>
-    <string name="app_name">Geonote</string>
+    <string name="map_key" translatable="false">AIzaSyAonUnLwjB990hsIilfRIK_bzWfIfMzoNM</string>
+    <string name="app_name" translatable="false">Geonote</string>
+    <string name="channel_name" translatable="false">Notification</string>
+    <string name="channel_description" translatable="false">base notification</string>
+
     <string name="empty_data">Empty data</string>
-    <string name="channel_name">Notification</string>
-    <string name="channel_description">base notification</string>
-    <string name="map_key">AIzaSyAonUnLwjB990hsIilfRIK_bzWfIfMzoNM</string>
-    <string name="title_request_permissions">Необходимо разрешение</string>
-    <string name="text_request_permissions">Для корректной работы приложения необходимо разрешение</string>
-    <string name="positive_button_permissions">Дать разрешение</string>
-    <string name="add_note">Добавить новую</string>
-    <string name="see_on_map">Показать на карте</string>
-    <string name="settings_title">Настройки</string>
-    <string name="all_notes">Все заметки</string>
+    <string name="title_request_permissions">Need permission</string>
+    <string name="text_request_permissions">For correct work application permission is required</string>
+    <string name="positive_button_permissions">Give a permission</string>
+    <string name="add_note">Add card</string>
+    <string name="see_on_map">Show on the card</string>
+    <string name="settings_title">Settings</string>
+    <string name="all_notes">All notes</string>
 </resources>

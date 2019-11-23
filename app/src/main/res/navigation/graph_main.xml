@@ -5,17 +5,19 @@
     android:id="@+id/graph_main"
     app:startDestination="@id/listFragment">
 
+    <action
+        android:id="@+id/action_to_detailfragment"
+        app:destination="@id/detailFragment" />
+
+    <action
+        android:id="@+id/action_to_edit_detailfragment"
+        app:destination="@id/editDetailFragment" />
+
     <fragment
         android:id="@+id/listFragment"
         android:name="com.geonote.ui.list.ListFragment"
         android:label="listFragment"
-        tools:layout="@layout/fragment_list">
-
-        <action
-            android:id="@+id/action_to_detailfragment"
-            app:destination="@id/detailFragment" />
-
-    </fragment>
+        tools:layout="@layout/fragment_list"/>
 
     <fragment
         android:id="@+id/detailFragment"
@@ -25,9 +27,6 @@
         <argument
             android:name="noteId"
             app:argType="long" />
-        <action
-            android:id="@+id/action_to_edit_detailfragment"
-            app:destination="@id/editDetailFragment" />
     </fragment>
 
     <fragment
@@ -59,9 +58,6 @@
         android:id="@+id/mapFragment"
         android:name="com.geonote.ui.mapAllNotes.AllNotesFragmentBehavior"
         android:label="mapFragment"
-        tools:layout="@layout/fragment_all_notes">
-
-    </fragment>
-
+        tools:layout="@layout/fragment_all_notes" />
 
 </navigation>

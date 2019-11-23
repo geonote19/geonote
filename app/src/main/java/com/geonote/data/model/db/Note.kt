@@ -13,9 +13,9 @@ data class Note(
     val description: String,
     @ColumnInfo(name = "thumbnail_uri")
     val thumbnailUri: String,
-    val longitude: Double,
-    val latitude: Double,
+    var longitude: Double,
+    var latitude: Double,
     @ColumnInfo(name = "radius_m")
-    val radiusM: Int,
-    val lifetime: Long
+    var radiusM: Int,
+    var lifetimeMs: Long
 )

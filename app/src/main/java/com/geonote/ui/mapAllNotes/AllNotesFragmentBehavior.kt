@@ -1,12 +1,12 @@
 package com.geonote.ui.mapAllNotes
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import com.geonote.BR
 import com.geonote.R
+import com.geonote.data.model.Marker
 import com.geonote.data.model.Status
 import com.geonote.data.model.db.Note
 import com.geonote.data.model.toMarker
@@ -37,15 +37,25 @@ class AllNotesFragmentBehavior :
     private lateinit var mAdapter: AllNotesAdapter
     private var mMapHelper: MapHelper? = null
 
-    private var clickListener: Listener? = null
+    private val mCallback = object : MapHelper.Companion.Callback {
+
+        override fun onMarkerClicked(markerData: Marker) {
+            mActivity.toDetailFragment(markerData.id)
+        }
+
+        override fun onMarkerPositionChanged(markerData: com.geonote.data.model.Marker) {
+            mViewModel.updateMarkerLocation(markerData)
+        }
+
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        mMapHelper = MapHelper(googleMap, context!!)
+        mMapHelper = MapHelper(googleMap, context!!, mCallback)
         mViewModel.noteData.observe(this, Observer {
             if (it.status == Status.SUCCESS) {
                 it.data?.let {
                     mAdapter.setData(it)
-                    mMapHelper!!.placeMarkers(it.map { it.toMarker() })
+                    mMapHelper?.placeMarkers(it.map { it.toMarker() })
                 }
             }
         })
@@ -70,6 +80,11 @@ class AllNotesFragmentBehavior :
         bottomSheet.applyDefaultOutlineProvider(CustomViewOutlineProvider.RoundedArea.TOP)
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        textForBehavior.setOnClickListener {
+            bottomSheetBehavior.state =
+                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) BottomSheetBehavior.STATE_EXPANDED
+                else BottomSheetBehavior.STATE_COLLAPSED
+        }
         allNotesMapRecycler.addItemDecoration(
             VerticalSpaceItemDecoration(2.toPixels())
         )
@@ -85,23 +100,8 @@ class AllNotesFragmentBehavior :
         mViewDataBinding.mapView.onLowMemory()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is Listener) {
-            clickListener = context
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        clickListener = null
-    }
-
-    override fun onClickNote(item: Note) {
-        clickListener?.onCarNote(item)
-    }
-
-    interface Listener {
-        fun onCarNote(item: Note)
+    override fun onClickNote(note: Note) {
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        mMapHelper?.setCameraPosition(note.latitude, note.longitude)
     }
 }
