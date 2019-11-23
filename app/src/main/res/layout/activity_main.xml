@@ -13,17 +13,56 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#262626"
         android:orientation="vertical"
-        tools:context=".ui.MainActivity"
-        android:background="#262626">
+        tools:context=".ui.MainActivity">
 
         <fragment
             android:id="@+id/navHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             app:defaultNavHost="true"
             app:navGraph="@navigation/graph_main" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <ImageView
+                android:id="@+id/buttonAdd"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tab_background"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_navigation_add" />
+
+            <ImageView
+                android:id="@+id/buttonMenu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tab_background"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_navigation_menu" />
+
+            <ImageView
+                android:id="@+id/buttonMap"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/tab_background"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_navigation_map" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

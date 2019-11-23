@@ -1,8 +1,10 @@
 package com.geonote.ui
 
 import android.Manifest
+import android.graphics.Color
 
 import android.os.Build
+import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.geonote.BR
 import com.geonote.GraphMainDirections
@@ -11,14 +13,13 @@ import com.geonote.data.model.db.Note
 import com.geonote.databinding.ActivityMainBinding
 import com.geonote.ui.base.BaseActivity
 import com.geonote.utils.RequestPermissions
+import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
 
     private val LIST_PERMISSONS = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION,
-        Manifest.permission.READ_CALENDAR,
-        Manifest.permission.WRITE_CALENDAR
+        Manifest.permission.ACCESS_FINE_LOCATION
     )
 
     private val requestPermission = RequestPermissions(this, LIST_PERMISSONS)
@@ -28,12 +29,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     override val mBindingVariable = BR.viewmodel
     override val mNavHostId = R.id.navHostFragment
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        buttonMap.setOnClickListener {
+            toMapActivity()
+        }
+        buttonMenu.setOnClickListener {
+            toListFragment()
+        }
+    }
 
     override fun onStart() {
         if (requestPermission.ifHasPermissions()) Timber.e("Permissions")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = resources.getColor(R.color.colorToolbar)
+            window.navigationBarColor = Color.WHITE
         }
         super.onStart()
     }
@@ -59,6 +70,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     fun toEditDetailFragment(note: Note) {
         val action = GraphMainDirections.actionToEditDetailfragment(note)
         mNavController!!.navigate(action)
+    }
+
+    fun toListFragment() {
+        mNavController!!.navigate(R.id.listFragment)
     }
 
     fun toDetailFragment(noteId: Long) {
