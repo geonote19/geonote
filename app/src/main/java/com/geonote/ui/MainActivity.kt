@@ -1,6 +1,7 @@
 package com.geonote.ui
 
 import android.Manifest
+import android.graphics.Color
 
 import android.os.Build
 import android.os.Bundle
@@ -43,6 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = resources.getColor(R.color.colorToolbar)
+            window.navigationBarColor = Color.WHITE
         }
         super.onStart()
     }
