@@ -15,7 +15,7 @@ class EditDetailFragmentViewModel(
     appRepository: AppRepository
 ) : BaseViewModel(application, appRepository) {
 
-    private val noteDataMutable = MutableLiveData<Event<Note>>()
+    val noteDataMutable = MutableLiveData<Event<Note>>()
     val note = ObservableField<Note>()
 
     fun loadNote(id: Long) {
@@ -25,6 +25,6 @@ class EditDetailFragmentViewModel(
     }
 
     fun save() {
-        //Toast.makeText(getApplication(), "Сохранено", Toast.LENGTH_SHORT).show()
+
     }
 }
