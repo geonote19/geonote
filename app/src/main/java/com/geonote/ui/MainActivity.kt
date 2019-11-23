@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
+import com.afollestad.materialdialogs.MaterialDialog
 import com.geonote.BR
 import com.geonote.GraphMainDirections
 import com.geonote.R
@@ -46,6 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
             }
 
         }
+
         buttonMenu.setOnClickListener {
             if(currentFragment !is ListFragment) {
                 toListFragment()
