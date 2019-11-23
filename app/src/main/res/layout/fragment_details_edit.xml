@@ -18,14 +18,6 @@
         android:paddingEnd="10dp"
         android:paddingBottom="10dp">
 
-        <ImageView
-            android:id="@+id/mapPreview"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/title"
@@ -40,8 +32,40 @@
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mapPreview" />
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/dateFrom"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/note_item_bg"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/dateTo"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/dateTo"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/note_item_bg"
+            android:padding="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/dateFrom"
+            app:layout_constraintLeft_toRightOf="@id/dateFrom"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dateFrom"/>
 
         <EditText
             android:id="@+id/description"
@@ -57,7 +81,7 @@
             app:layout_constraintBottom_toTopOf="@+id/saveNote"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            app:layout_constraintTop_toBottomOf="@id/dateFrom" />
 
         <Button
             android:id="@+id/saveNote"
