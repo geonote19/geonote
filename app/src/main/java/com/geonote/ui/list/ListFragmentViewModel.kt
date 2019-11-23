@@ -27,14 +27,4 @@ class ListFragmentViewModel(
             mAppRepository.getNoteList()
         }
     }
-    fun  searchList(search: String){
-        Log.e("QQQ",search)
-
-       /* noteDataList = noteDataList.filter {
-            it.header.contains(
-                search,
-                true
-            )
-        }.toMutableList()*/
-    }
 }

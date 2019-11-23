@@ -9,6 +9,8 @@ import com.geonote.data.model.db.Note
 class AllNotesAdapter(private var notes: MutableList<Note>, private val listener: ClickListener) :
     RecyclerView.Adapter<AllNotesHolder>() {
 
+    private val newDataBottomSheet = mutableListOf<Note>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllNotesHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_one_note, parent, false)
@@ -23,6 +25,18 @@ class AllNotesAdapter(private var notes: MutableList<Note>, private val listener
     fun setData(notes: List<Note>) {
         this.notes.clear()
         this.notes.addAll(notes)
+        newDataBottomSheet.addAll(notes)
+        notifyDataSetChanged()
+    }
+
+    fun searchList(search: String) {
+        this.notes = newDataBottomSheet
+        this.notes = this.notes.filter {
+            (it.title.contains(
+                search,
+                true
+            ))
+        }.toMutableList()
         notifyDataSetChanged()
     }
 
