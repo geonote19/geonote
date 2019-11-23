@@ -18,6 +18,11 @@
         app:destination="@+id/mapDetailsPin"
         />
 
+    <action
+        android:id="@+id/btnCancel"
+        app:destination="@+id/editDetailFragment"
+        />
+
     <stackless_fragment
         android:id="@+id/listFragment"
         android:name="com.geonote.ui.list.ListFragment"

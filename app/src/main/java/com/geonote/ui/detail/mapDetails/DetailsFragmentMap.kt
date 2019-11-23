@@ -31,6 +31,8 @@ class DetailsFragmentMap :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        btnCancel.setOnClickListener { Navigation.findNavController(view!!).navigateUp() }
+
         mapScreenDetails.let {
             lifecycle.addObserver(it)
             it.onCreate(savedInstanceState)
@@ -61,9 +63,10 @@ class DetailsFragmentMap :
 
     override fun onMapReady(googleMap: GoogleMap?) {
         googleMap ?: return
-        mMapHelper = MapHelper(googleMap, context!!)
-        mMapHelper!!.chooseCoordinates(mCoordinates)
+        mMapHelper = context?.let { MapHelper(googleMap, it) }
+        mMapHelper?.chooseCoordinates(mCoordinates)
     }
+
 }
 
 interface BitmapConsumer {
