@@ -1,8 +1,8 @@
 package com.geonote.ui
 
 import android.Manifest
+import android.graphics.Bitmap
 import android.graphics.Color
-
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
@@ -13,8 +13,11 @@ import com.geonote.data.model.db.Note
 import com.geonote.databinding.ActivityMainBinding
 import com.geonote.ui.base.BaseActivity
 import com.geonote.utils.RequestPermissions
+import com.geonote.utils.addDays
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
+import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
 
@@ -28,6 +31,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
     override val mLayoutId = R.layout.activity_main
     override val mBindingVariable = BR.viewmodel
     override val mNavHostId = R.id.navHostFragment
+    var mapBitmap: Bitmap? = null
+    var latlng: LatLng? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,21 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
         }
         buttonMenu.setOnClickListener {
             toListFragment()
+        }
+        buttonAdd.setOnClickListener{
+                var newNote = Note(
+                    0,
+                    "",
+                    "",
+                    "",
+                    53.899604,
+                    27.557117,
+                    100,
+                    Date().addDays(-1).time,
+                    Date().addDays(2).time,
+                    Color.RED
+                )
+                toEditDetailFragment(newNote)
         }
     }
 
@@ -65,6 +85,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
 
     fun toMapDetailFragment(noteId: Long) {
+        val action = GraphMainDirections.mapPreview(noteId)
+        mNavController?.navigate(action)
     }
 
     fun toEditDetailFragment(note: Note) {

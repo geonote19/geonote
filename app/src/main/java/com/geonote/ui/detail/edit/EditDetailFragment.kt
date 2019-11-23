@@ -1,5 +1,7 @@
 package com.geonote.ui.detail.edit
 
+import android.app.DatePickerDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -12,8 +14,8 @@ import com.geonote.ui.MainActivity
 import com.geonote.ui.base.BaseFragment
 import com.geonote.utils.addDays
 import kotlinx.android.synthetic.main.fragment_details_edit.*
+import java.text.DateFormat
 import java.util.*
-import android.graphics.Color
 
 
 class EditDetailFragment :
@@ -43,7 +45,7 @@ class EditDetailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        mapPreview.setOnClickListener { toMapDetailFragment() }
+        mapPreview.setOnClickListener { toMapDetailFragment() }
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         saveNote.setOnClickListener { save() }
 
@@ -52,6 +54,16 @@ class EditDetailFragment :
         dateFrom.text = dateFormat.format(mNote.dateFrom)
         dateTo.text = dateFormat.format(mNote.dateTo)
 
+        mActivity.mapBitmap?.let{
+            mapPreview.setImageBitmap(it)
+            mActivity.mapBitmap = null
+        }
+
+        mActivity.latlng?.let {
+            mNote.latitude = mActivity.latlng!!.latitude
+            mNote.longitude = mActivity.latlng!!.longitude
+            mActivity.latlng = null
+        }
 
         dateFrom.setOnClickListener {
             DatePickerDialog(context ?: throw RuntimeException("где контекст???"),
