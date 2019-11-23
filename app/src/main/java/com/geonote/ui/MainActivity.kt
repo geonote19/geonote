@@ -1,6 +1,7 @@
 package com.geonote.ui
 
 import android.Manifest
+
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.geonote.BR
@@ -9,7 +10,6 @@ import com.geonote.R
 import com.geonote.data.model.db.Note
 import com.geonote.databinding.ActivityMainBinding
 import com.geonote.ui.base.BaseActivity
-import com.geonote.ui.detail.edit.EditDetailFragmentDirections
 import com.geonote.utils.RequestPermissions
 import timber.log.Timber
 
@@ -54,8 +54,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() 
 
 
     fun toMapDetailFragment(noteId: Long) {
-        val action = EditDetailFragmentDirections.mapPreview(noteId)
-        mNavController?.navigate(action)
     }
 
     fun toEditDetailFragment(note: Note) {
